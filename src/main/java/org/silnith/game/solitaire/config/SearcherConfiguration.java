@@ -16,39 +16,39 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SearcherConfiguration {
-
-	@Bean
-	public GoalValidator goalValidator() {
-		return new GoalValidator();
-	}
-
-	@Bean
-	public PileValidator pileValidator() {
-		return new PileValidator();
-	}
-
-	@Bean
-	public BoardValidator boardValidator() {
-		return new BoardValidator(7, 52, pileValidator(), goalValidator());
-	}
-
-	@Bean
-	public Solitaire game() {
-		final Solitaire solitaire = new Solitaire(7, boardValidator());
-		solitaire.setReturnRedundantMoves(false);
-		return solitaire;
-	}
-
-	@Bean
-	public List<Card> deck() {
-		final List<Card> deck = new ArrayList<>(52);
-		for (final Value value : Value.values()) {
-			for (final Suit suit : Suit.values()) {
-				deck.add(new Card(value, suit));
-			}
-		}
-		Collections.shuffle(deck);
-		return deck;
-	}
-
+    
+    @Bean
+    public GoalValidator goalValidator() {
+        return new GoalValidator();
+    }
+    
+    @Bean
+    public PileValidator pileValidator() {
+        return new PileValidator();
+    }
+    
+    @Bean
+    public BoardValidator boardValidator() {
+        return new BoardValidator(7, 52, pileValidator(), goalValidator());
+    }
+    
+    @Bean
+    public Solitaire game() {
+        final Solitaire solitaire = new Solitaire(7, boardValidator());
+        solitaire.setReturnRedundantMoves(false);
+        return solitaire;
+    }
+    
+    @Bean
+    public List<Card> deck() {
+        final List<Card> deck = new ArrayList<>(52);
+        for (final Value value : Value.values()) {
+            for (final Suit suit : Suit.values()) {
+                deck.add(new Card(value, suit));
+            }
+        }
+        Collections.shuffle(deck);
+        return deck;
+    }
+    
 }
