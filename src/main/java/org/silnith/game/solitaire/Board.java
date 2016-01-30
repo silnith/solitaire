@@ -10,6 +10,7 @@ import java.util.Map;
 import org.silnith.deck.Card;
 import org.silnith.deck.Suit;
 
+
 public class Board {
     
     private final List<Pile> piles;
@@ -26,13 +27,13 @@ public class Board {
         int remaining = deck.size();
         final Iterator<Card> iter = deck.iterator();
         final List<List<Card>> stacks = new ArrayList<>(numPiles);
-        for (int i = 0; i < numPiles; i++) {
+        for (int i = 0; i < numPiles; i++ ) {
             stacks.add(new ArrayList<Card>(i));
         }
-        for (int i = 0; i < numPiles; i++) {
-            for (int j = i; j < numPiles; j++) {
+        for (int i = 0; i < numPiles; i++ ) {
+            for (int j = i; j < numPiles; j++ ) {
                 final Card card = iter.next();
-                remaining--;
+                remaining-- ;
                 stacks.get(j).add(card);
             }
         }
@@ -42,7 +43,7 @@ public class Board {
             tempPiles.add(new Pile(stack, null));
         }
         
-//        this.piles = Collections.unmodifiableList(tempPiles);
+        // this.piles = Collections.unmodifiableList(tempPiles);
         this.piles = tempPiles;
         
         final List<Card> tempDrawPile = new ArrayList<>(remaining);
@@ -50,7 +51,7 @@ public class Board {
             final Card card = iter.next();
             tempDrawPile.add(card);
         }
-//        this.drawPile = Collections.unmodifiableList(tempDrawPile);
+        // this.drawPile = Collections.unmodifiableList(tempDrawPile);
         this.drawPile = tempDrawPile;
         this.drawIndex = 0;
         
@@ -60,20 +61,19 @@ public class Board {
             tempGoal.put(suit, cards);
         }
         
-//        this.goal = Collections.unmodifiableMap(tempGoal);
+        // this.goal = Collections.unmodifiableMap(tempGoal);
         this.goal = tempGoal;
     }
     
     /**
      * Constructs a new board. All parameters must be immutable.
      */
-    protected Board(final List<Pile> piles, final List<Card> drawPile,
-            final int drawIndex, final Map<Suit, List<Card>> goal) {
+    protected Board(final List<Pile> piles, final List<Card> drawPile, final int drawIndex,
+            final Map<Suit, List<Card>> goal) {
         super();
         this.piles = piles;
         if (drawIndex > drawPile.size()) {
-            throw new IllegalArgumentException(
-                    "Draw index outside of draw pile.");
+            throw new IllegalArgumentException("Draw index outside of draw pile.");
         }
         this.drawPile = drawPile;
         this.drawIndex = drawIndex;
@@ -131,8 +131,7 @@ public class Board {
         return new Board(piles, drawPile, newIndex, goal);
     }
     
-    public Board moveStack(final int fromIndex, final int toIndex,
-            final int numCards) {
+    public Board moveStack(final int fromIndex, final int toIndex, final int numCards) {
         if (fromIndex == toIndex) {
             throw new IllegalArgumentException();
         }
@@ -146,7 +145,8 @@ public class Board {
         final List<Pile> newPiles = new ArrayList<>(piles);
         newPiles.set(fromIndex, newFromPile);
         newPiles.set(toIndex, newToPile);
-//        return new Board(Collections.unmodifiableList(newPiles), drawPile, drawIndex, goal);
+        // return new Board(Collections.unmodifiableList(newPiles), drawPile,
+        // drawIndex, goal);
         return new Board(newPiles, drawPile, drawIndex, goal);
     }
     
@@ -160,7 +160,8 @@ public class Board {
         final List<Pile> newPiles = new ArrayList<>(piles);
         newPiles.set(index, newPile);
         
-//        return new Board(Collections.unmodifiableList(newPiles), drawPile, drawIndex, newGoal);
+        // return new Board(Collections.unmodifiableList(newPiles), drawPile,
+        // drawIndex, newGoal);
         return new Board(newPiles, drawPile, drawIndex, newGoal);
     }
     
@@ -176,7 +177,8 @@ public class Board {
         final List<Pile> newPiles = new ArrayList<>(piles);
         newPiles.set(index, newPile);
         
-//        return new Board(Collections.unmodifiableList(newPiles), newDrawPile, newDrawIndex, goal);
+        // return new Board(Collections.unmodifiableList(newPiles), newDrawPile,
+        // newDrawIndex, goal);
         return new Board(newPiles, newDrawPile, newDrawIndex, goal);
     }
     
@@ -212,22 +214,22 @@ public class Board {
         final List<Card> newStackForSuit = new ArrayList<>(13);
         newStackForSuit.addAll(stackForSuit);
         newStackForSuit.add(card);
-//        newGoal.put(suit, Collections.unmodifiableList(newStackForSuit));
+        // newGoal.put(suit, Collections.unmodifiableList(newStackForSuit));
         newGoal.put(suit, newStackForSuit);
         
-//        return Collections.unmodifiableMap(newGoal);
+        // return Collections.unmodifiableMap(newGoal);
         return newGoal;
     }
     
     private Map<Suit, List<Card>> removeFromGoal(final Suit suit) {
         final Map<Suit, List<Card>> newGoal = new EnumMap<>(goal);
         final List<Card> stackForSuit = newGoal.get(suit);
-//        final List<Card> newStackForSuit = stackForSuit.subList(0, stackForSuit.size() - 1);
-        final List<Card> newStackForSuit = new ArrayList<>(
-                stackForSuit.subList(0, stackForSuit.size() - 1));
+        // final List<Card> newStackForSuit = stackForSuit.subList(0,
+        // stackForSuit.size() - 1);
+        final List<Card> newStackForSuit = new ArrayList<>(stackForSuit.subList(0, stackForSuit.size() - 1));
         newGoal.put(suit, newStackForSuit);
         
-//        return Collections.unmodifiableMap(newGoal);
+        // return Collections.unmodifiableMap(newGoal);
         return newGoal;
     }
     
@@ -236,16 +238,14 @@ public class Board {
         final List<Card> newDrawPile = new ArrayList<>(size - 1);
         newDrawPile.addAll(drawPile.subList(0, drawIndex - 1));
         newDrawPile.addAll(drawPile.subList(drawIndex, size));
-//        return Collections.unmodifiableList(newDrawPile);
+        // return Collections.unmodifiableList(newDrawPile);
         return newDrawPile;
     }
     
     @Override
     public int hashCode() {
-        return 0xc284f7a1 ^ piles.hashCode()
-                ^ Integer.rotateLeft(drawPile.hashCode(), 8)
-                ^ Integer.rotateLeft(drawIndex, 16)
-                ^ Integer.rotateLeft(goal.hashCode(), 24);
+        return 0xc284f7a1 ^ piles.hashCode() ^ Integer.rotateLeft(drawPile.hashCode(), 8)
+                ^ Integer.rotateLeft(drawIndex, 16) ^ Integer.rotateLeft(goal.hashCode(), 24);
     }
     
     @Override
@@ -261,8 +261,7 @@ public class Board {
                 }
             }
             // Put drawIndex first since it changes a lot.
-            return drawIndex == board.drawIndex && piles.equals(board.piles)
-                    && goal.equals(board.goal)
+            return drawIndex == board.drawIndex && piles.equals(board.piles) && goal.equals(board.goal)
                     && drawPile.equals(board.drawPile);
         } else {
             return false;
@@ -271,8 +270,8 @@ public class Board {
     
     @Override
     public String toString() {
-        return "Board {piles: " + piles + ", drawPile: " + drawPile
-                + ", drawIndex: " + drawIndex + ", goal: " + goal + "}";
+        return "Board {piles: " + piles + ", drawPile: " + drawPile + ", drawIndex: " + drawIndex + ", goal: " + goal
+                + "}";
     }
     
 }

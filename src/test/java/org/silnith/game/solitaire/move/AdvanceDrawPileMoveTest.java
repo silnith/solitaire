@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.silnith.game.solitaire.Board;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class AdvanceDrawPileMoveTest {
     
@@ -37,8 +38,7 @@ public class AdvanceDrawPileMoveTest {
         final AdvanceDrawPileMove firstMove = new AdvanceDrawPileMove(20, 4);
         final AdvanceDrawPileMove secondMove = new AdvanceDrawPileMove(24, 5);
         
-        final AdvanceDrawPileMove coalescedMove = firstMove
-                .coalesce(secondMove);
+        final AdvanceDrawPileMove coalescedMove = firstMove.coalesce(secondMove);
         
         assertEquals(20, coalescedMove.getBeginningIndex());
     }
@@ -48,8 +48,7 @@ public class AdvanceDrawPileMoveTest {
         final AdvanceDrawPileMove firstMove = new AdvanceDrawPileMove(20, 4);
         final AdvanceDrawPileMove secondMove = new AdvanceDrawPileMove(24, 5);
         
-        final AdvanceDrawPileMove coalescedMove = firstMove
-                .coalesce(secondMove);
+        final AdvanceDrawPileMove coalescedMove = firstMove.coalesce(secondMove);
         
         assertEquals(9, coalescedMove.getIncrement());
     }

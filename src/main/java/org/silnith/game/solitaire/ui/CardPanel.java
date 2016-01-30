@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.silnith.deck.Card;
 
+
 public class CardPanel extends JPanel {
     
     public CardPanel(final Card card) {

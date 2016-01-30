@@ -6,6 +6,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class PileToGoalMove implements SolitaireMove {
     
     private final int sourcePile;

@@ -43,6 +43,7 @@ import org.silnith.game.solitaire.move.DrawToGoalMove;
 import org.silnith.game.solitaire.move.ResetDrawPileMove;
 import org.silnith.game.solitaire.move.SolitaireMove;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class SolitaireTest {
     
@@ -69,7 +70,7 @@ public class SolitaireTest {
             this.emptyGoal.put(suit, emptyListOfCards);
         }
         this.emptyPiles = new ArrayList<>(this.solitaire.getNumberOfStacks());
-        for (int i = 0; i < this.solitaire.getNumberOfStacks(); i++) {
+        for (int i = 0; i < this.solitaire.getNumberOfStacks(); i++ ) {
             this.emptyPiles.add(new Pile(emptyListOfCards, emptyListOfCards));
         }
     }
@@ -137,38 +138,30 @@ public class SolitaireTest {
     public void testDeal() {
         final List<Pile> piles = new ArrayList<>(7);
         piles.add(new Pile(Arrays.asList(new Card(ACE, CLUB)), null));
-        piles.add(new Pile(Arrays.asList(new Card(TWO, CLUB), new Card(EIGHT,
-                CLUB)), null));
-        piles.add(new Pile(Arrays.asList(new Card(THREE, CLUB), new Card(NINE,
-                CLUB), new Card(ACE, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(FOUR, CLUB), new Card(TEN,
-                CLUB), new Card(TWO, DIAMOND), new Card(SIX, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(FIVE, CLUB), new Card(JACK,
-                CLUB), new Card(THREE, DIAMOND), new Card(SEVEN, DIAMOND),
-                new Card(TEN, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(SIX, CLUB), new Card(QUEEN,
-                CLUB), new Card(FOUR, DIAMOND), new Card(EIGHT, DIAMOND),
-                new Card(JACK, DIAMOND), new Card(KING, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(SEVEN, CLUB), new Card(KING,
-                CLUB), new Card(FIVE, DIAMOND), new Card(NINE, DIAMOND),
-                new Card(QUEEN, DIAMOND), new Card(ACE, HEART), new Card(TWO,
-                        HEART)), null));
+        piles.add(new Pile(Arrays.asList(new Card(TWO, CLUB), new Card(EIGHT, CLUB)), null));
+        piles.add(new Pile(Arrays.asList(new Card(THREE, CLUB), new Card(NINE, CLUB), new Card(ACE, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(FOUR, CLUB), new Card(TEN, CLUB), new Card(TWO, DIAMOND),
+                new Card(SIX, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(FIVE, CLUB), new Card(JACK, CLUB), new Card(THREE, DIAMOND),
+                new Card(SEVEN, DIAMOND), new Card(TEN, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(SIX, CLUB), new Card(QUEEN, CLUB), new Card(FOUR, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(JACK, DIAMOND), new Card(KING, DIAMOND)), null));
+        piles.add(new Pile(
+                Arrays.asList(new Card(SEVEN, CLUB), new Card(KING, CLUB), new Card(FIVE, DIAMOND),
+                        new Card(NINE, DIAMOND), new Card(QUEEN, DIAMOND), new Card(ACE, HEART), new Card(TWO, HEART)),
+                null));
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         goal.put(CLUB, Collections.<Card> emptyList());
         goal.put(DIAMOND, Collections.<Card> emptyList());
         goal.put(HEART, Collections.<Card> emptyList());
         goal.put(SPADE, Collections.<Card> emptyList());
-        final List<Card> drawPile = Arrays.asList(new Card(THREE, HEART),
-                new Card(FOUR, HEART), new Card(FIVE, HEART), new Card(SIX,
-                        HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
-                new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK,
-                        HEART), new Card(QUEEN, HEART), new Card(KING, HEART),
-                new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE,
-                        SPADE), new Card(FOUR, SPADE), new Card(FIVE, SPADE),
-                new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT,
-                        SPADE), new Card(NINE, SPADE), new Card(TEN, SPADE),
-                new Card(JACK, SPADE), new Card(QUEEN, SPADE), new Card(KING,
-                        SPADE));
+        final List<Card> drawPile = Arrays.asList(new Card(THREE, HEART), new Card(FOUR, HEART), new Card(FIVE, HEART),
+                new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE, HEART),
+                new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART), new Card(KING, HEART),
+                new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE),
+                new Card(KING, SPADE));
         final Board expectedBoard = new Board(piles, drawPile, 0, goal);
         
         final List<Card> deck = orderedDeck();
@@ -183,38 +176,30 @@ public class SolitaireTest {
     public void testDealDeck() {
         final List<Pile> piles = new ArrayList<>(7);
         piles.add(new Pile(Arrays.asList(new Card(ACE, CLUB)), null));
-        piles.add(new Pile(Arrays.asList(new Card(TWO, CLUB), new Card(EIGHT,
-                CLUB)), null));
-        piles.add(new Pile(Arrays.asList(new Card(THREE, CLUB), new Card(NINE,
-                CLUB), new Card(ACE, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(FOUR, CLUB), new Card(TEN,
-                CLUB), new Card(TWO, DIAMOND), new Card(SIX, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(FIVE, CLUB), new Card(JACK,
-                CLUB), new Card(THREE, DIAMOND), new Card(SEVEN, DIAMOND),
-                new Card(TEN, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(SIX, CLUB), new Card(QUEEN,
-                CLUB), new Card(FOUR, DIAMOND), new Card(EIGHT, DIAMOND),
-                new Card(JACK, DIAMOND), new Card(KING, DIAMOND)), null));
-        piles.add(new Pile(Arrays.asList(new Card(SEVEN, CLUB), new Card(KING,
-                CLUB), new Card(FIVE, DIAMOND), new Card(NINE, DIAMOND),
-                new Card(QUEEN, DIAMOND), new Card(ACE, HEART), new Card(TWO,
-                        HEART)), null));
+        piles.add(new Pile(Arrays.asList(new Card(TWO, CLUB), new Card(EIGHT, CLUB)), null));
+        piles.add(new Pile(Arrays.asList(new Card(THREE, CLUB), new Card(NINE, CLUB), new Card(ACE, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(FOUR, CLUB), new Card(TEN, CLUB), new Card(TWO, DIAMOND),
+                new Card(SIX, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(FIVE, CLUB), new Card(JACK, CLUB), new Card(THREE, DIAMOND),
+                new Card(SEVEN, DIAMOND), new Card(TEN, DIAMOND)), null));
+        piles.add(new Pile(Arrays.asList(new Card(SIX, CLUB), new Card(QUEEN, CLUB), new Card(FOUR, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(JACK, DIAMOND), new Card(KING, DIAMOND)), null));
+        piles.add(new Pile(
+                Arrays.asList(new Card(SEVEN, CLUB), new Card(KING, CLUB), new Card(FIVE, DIAMOND),
+                        new Card(NINE, DIAMOND), new Card(QUEEN, DIAMOND), new Card(ACE, HEART), new Card(TWO, HEART)),
+                null));
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         goal.put(CLUB, Collections.<Card> emptyList());
         goal.put(DIAMOND, Collections.<Card> emptyList());
         goal.put(HEART, Collections.<Card> emptyList());
         goal.put(SPADE, Collections.<Card> emptyList());
-        final List<Card> drawPile = Arrays.asList(new Card(THREE, HEART),
-                new Card(FOUR, HEART), new Card(FIVE, HEART), new Card(SIX,
-                        HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
-                new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK,
-                        HEART), new Card(QUEEN, HEART), new Card(KING, HEART),
-                new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE,
-                        SPADE), new Card(FOUR, SPADE), new Card(FIVE, SPADE),
-                new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT,
-                        SPADE), new Card(NINE, SPADE), new Card(TEN, SPADE),
-                new Card(JACK, SPADE), new Card(QUEEN, SPADE), new Card(KING,
-                        SPADE));
+        final List<Card> drawPile = Arrays.asList(new Card(THREE, HEART), new Card(FOUR, HEART), new Card(FIVE, HEART),
+                new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE, HEART),
+                new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART), new Card(KING, HEART),
+                new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE),
+                new Card(KING, SPADE));
         final Board expectedBoard = new Board(piles, drawPile, 0, goal);
         
         final List<Card> deck = orderedDeck();
@@ -236,31 +221,25 @@ public class SolitaireTest {
         piles.add(new Pile(null, null));
         final List<Card> drawPile = Collections.emptyList();
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
-        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB),
-                new Card(THREE, CLUB), new Card(FOUR, CLUB), new Card(FIVE,
-                        CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB),
-                new Card(EIGHT, CLUB), new Card(NINE, CLUB),
-                new Card(TEN, CLUB), new Card(JACK, CLUB),
-                new Card(QUEEN, CLUB), new Card(KING, CLUB)));
-        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO,
-                DIAMOND), new Card(THREE, DIAMOND), new Card(FOUR, DIAMOND),
-                new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(
-                        SEVEN, DIAMOND), new Card(EIGHT, DIAMOND), new Card(
-                        NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK,
-                        DIAMOND), new Card(QUEEN, DIAMOND), new Card(KING,
-                        DIAMOND)));
-        goal.put(HEART, Arrays.asList(new Card(ACE, HEART),
-                new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR,
-                        HEART), new Card(FIVE, HEART), new Card(SIX, HEART),
-                new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE,
-                        HEART), new Card(TEN, HEART), new Card(JACK, HEART),
-                new Card(QUEEN, HEART), new Card(KING, HEART)));
-        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE),
-                new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR,
-                        SPADE), new Card(FIVE, SPADE), new Card(SIX, SPADE),
-                new Card(SEVEN, SPADE), new Card(EIGHT, SPADE), new Card(NINE,
-                        SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE),
-                new Card(QUEEN, SPADE), new Card(KING, SPADE)));
+        goal.put(CLUB,
+                Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB), new Card(THREE, CLUB), new Card(FOUR, CLUB),
+                        new Card(FIVE, CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB), new Card(EIGHT, CLUB),
+                        new Card(NINE, CLUB), new Card(TEN, CLUB), new Card(JACK, CLUB), new Card(QUEEN, CLUB),
+                        new Card(KING, CLUB)));
+        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO, DIAMOND), new Card(THREE, DIAMOND),
+                new Card(FOUR, DIAMOND), new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(SEVEN, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK, DIAMOND),
+                new Card(QUEEN, DIAMOND), new Card(KING, DIAMOND)));
+        goal.put(HEART,
+                Arrays.asList(new Card(ACE, HEART), new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR, HEART),
+                        new Card(FIVE, HEART), new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
+                        new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART),
+                        new Card(KING, HEART)));
+        goal.put(SPADE,
+                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                        new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                        new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE),
+                        new Card(KING, SPADE)));
         final Board board = new Board(piles, drawPile, 0, goal);
         
         assertTrue(solitaire.isWin(board));
@@ -279,25 +258,20 @@ public class SolitaireTest {
         final List<Card> drawPile = Collections.emptyList();
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         goal.put(CLUB, Collections.<Card> emptyList());
-        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO,
-                DIAMOND), new Card(THREE, DIAMOND), new Card(FOUR, DIAMOND),
-                new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(
-                        SEVEN, DIAMOND), new Card(EIGHT, DIAMOND), new Card(
-                        NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK,
-                        DIAMOND), new Card(QUEEN, DIAMOND), new Card(KING,
-                        DIAMOND)));
-        goal.put(HEART, Arrays.asList(new Card(ACE, HEART),
-                new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR,
-                        HEART), new Card(FIVE, HEART), new Card(SIX, HEART),
-                new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE,
-                        HEART), new Card(TEN, HEART), new Card(JACK, HEART),
-                new Card(QUEEN, HEART), new Card(KING, HEART)));
-        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE),
-                new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR,
-                        SPADE), new Card(FIVE, SPADE), new Card(SIX, SPADE),
-                new Card(SEVEN, SPADE), new Card(EIGHT, SPADE), new Card(NINE,
-                        SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE),
-                new Card(QUEEN, SPADE), new Card(KING, SPADE)));
+        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO, DIAMOND), new Card(THREE, DIAMOND),
+                new Card(FOUR, DIAMOND), new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(SEVEN, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK, DIAMOND),
+                new Card(QUEEN, DIAMOND), new Card(KING, DIAMOND)));
+        goal.put(HEART,
+                Arrays.asList(new Card(ACE, HEART), new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR, HEART),
+                        new Card(FIVE, HEART), new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
+                        new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART),
+                        new Card(KING, HEART)));
+        goal.put(SPADE,
+                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                        new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                        new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE),
+                        new Card(KING, SPADE)));
         final Board board = new Board(piles, drawPile, 0, goal);
         
         assertFalse(solitaire.isWin(board));
@@ -315,30 +289,26 @@ public class SolitaireTest {
         piles.add(new Pile(null, null));
         final List<Card> drawPile = Collections.emptyList();
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
-        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB),
-                new Card(THREE, CLUB), new Card(FOUR, CLUB), new Card(FIVE,
-                        CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB),
-                new Card(EIGHT, CLUB), new Card(NINE, CLUB),
-                new Card(TEN, CLUB), new Card(JACK, CLUB),
-                new Card(QUEEN, CLUB), new Card(KING, CLUB)));
-        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO,
-                DIAMOND), new Card(THREE, DIAMOND), new Card(FOUR, DIAMOND),
-                new Card(FIVE, DIAMOND), new Card(SEVEN, DIAMOND), new Card(
-                        EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN,
-                        DIAMOND), new Card(JACK, DIAMOND), new Card(QUEEN,
-                        DIAMOND), new Card(KING, DIAMOND)));
-        goal.put(HEART, Arrays.asList(new Card(ACE, HEART),
-                new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR,
-                        HEART), new Card(FIVE, HEART), new Card(SIX, HEART),
-                new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE,
-                        HEART), new Card(TEN, HEART), new Card(JACK, HEART),
-                new Card(QUEEN, HEART), new Card(KING, HEART)));
-        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE),
-                new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR,
-                        SPADE), new Card(FIVE, SPADE), new Card(SIX, SPADE),
-                new Card(SEVEN, SPADE), new Card(EIGHT, SPADE), new Card(NINE,
-                        SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE),
-                new Card(QUEEN, SPADE), new Card(KING, SPADE)));
+        goal.put(CLUB,
+                Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB), new Card(THREE, CLUB), new Card(FOUR, CLUB),
+                        new Card(FIVE, CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB), new Card(EIGHT, CLUB),
+                        new Card(NINE, CLUB), new Card(TEN, CLUB), new Card(JACK, CLUB), new Card(QUEEN, CLUB),
+                        new Card(KING, CLUB)));
+        goal.put(DIAMOND,
+                Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO, DIAMOND), new Card(THREE, DIAMOND),
+                        new Card(FOUR, DIAMOND), new Card(FIVE, DIAMOND), new Card(SEVEN, DIAMOND),
+                        new Card(EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN, DIAMOND),
+                        new Card(JACK, DIAMOND), new Card(QUEEN, DIAMOND), new Card(KING, DIAMOND)));
+        goal.put(HEART,
+                Arrays.asList(new Card(ACE, HEART), new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR, HEART),
+                        new Card(FIVE, HEART), new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
+                        new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART),
+                        new Card(KING, HEART)));
+        goal.put(SPADE,
+                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                        new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                        new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE),
+                        new Card(KING, SPADE)));
         final Board board = new Board(piles, drawPile, 0, goal);
         
         assertFalse(solitaire.isWin(board));
@@ -356,31 +326,24 @@ public class SolitaireTest {
         piles.add(new Pile(null, Arrays.asList(new Card(KING, SPADE))));
         final List<Card> drawPile = Collections.emptyList();
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
-        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB),
-                new Card(THREE, CLUB), new Card(FOUR, CLUB), new Card(FIVE,
-                        CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB),
-                new Card(EIGHT, CLUB), new Card(NINE, CLUB),
-                new Card(TEN, CLUB), new Card(JACK, CLUB),
-                new Card(QUEEN, CLUB), new Card(KING, CLUB)));
-        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO,
-                DIAMOND), new Card(THREE, DIAMOND), new Card(FOUR, DIAMOND),
-                new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(
-                        SEVEN, DIAMOND), new Card(EIGHT, DIAMOND), new Card(
-                        NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK,
-                        DIAMOND), new Card(QUEEN, DIAMOND), new Card(KING,
-                        DIAMOND)));
-        goal.put(HEART, Arrays.asList(new Card(ACE, HEART),
-                new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR,
-                        HEART), new Card(FIVE, HEART), new Card(SIX, HEART),
-                new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE,
-                        HEART), new Card(TEN, HEART), new Card(JACK, HEART),
-                new Card(QUEEN, HEART), new Card(KING, HEART)));
-        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE),
-                new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR,
-                        SPADE), new Card(FIVE, SPADE), new Card(SIX, SPADE),
-                new Card(SEVEN, SPADE), new Card(EIGHT, SPADE), new Card(NINE,
-                        SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE),
-                new Card(QUEEN, SPADE)));
+        goal.put(CLUB,
+                Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB), new Card(THREE, CLUB), new Card(FOUR, CLUB),
+                        new Card(FIVE, CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB), new Card(EIGHT, CLUB),
+                        new Card(NINE, CLUB), new Card(TEN, CLUB), new Card(JACK, CLUB), new Card(QUEEN, CLUB),
+                        new Card(KING, CLUB)));
+        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO, DIAMOND), new Card(THREE, DIAMOND),
+                new Card(FOUR, DIAMOND), new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(SEVEN, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK, DIAMOND),
+                new Card(QUEEN, DIAMOND), new Card(KING, DIAMOND)));
+        goal.put(HEART,
+                Arrays.asList(new Card(ACE, HEART), new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR, HEART),
+                        new Card(FIVE, HEART), new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
+                        new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART),
+                        new Card(KING, HEART)));
+        goal.put(SPADE,
+                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                        new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                        new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE)));
         final Board board = new Board(piles, drawPile, 0, goal);
         
         assertFalse(solitaire.isWin(board));
@@ -398,31 +361,24 @@ public class SolitaireTest {
         piles.add(new Pile(null, null));
         final List<Card> drawPile = Arrays.asList(new Card(KING, SPADE));
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
-        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB),
-                new Card(THREE, CLUB), new Card(FOUR, CLUB), new Card(FIVE,
-                        CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB),
-                new Card(EIGHT, CLUB), new Card(NINE, CLUB),
-                new Card(TEN, CLUB), new Card(JACK, CLUB),
-                new Card(QUEEN, CLUB), new Card(KING, CLUB)));
-        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO,
-                DIAMOND), new Card(THREE, DIAMOND), new Card(FOUR, DIAMOND),
-                new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(
-                        SEVEN, DIAMOND), new Card(EIGHT, DIAMOND), new Card(
-                        NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK,
-                        DIAMOND), new Card(QUEEN, DIAMOND), new Card(KING,
-                        DIAMOND)));
-        goal.put(HEART, Arrays.asList(new Card(ACE, HEART),
-                new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR,
-                        HEART), new Card(FIVE, HEART), new Card(SIX, HEART),
-                new Card(SEVEN, HEART), new Card(EIGHT, HEART), new Card(NINE,
-                        HEART), new Card(TEN, HEART), new Card(JACK, HEART),
-                new Card(QUEEN, HEART), new Card(KING, HEART)));
-        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE),
-                new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR,
-                        SPADE), new Card(FIVE, SPADE), new Card(SIX, SPADE),
-                new Card(SEVEN, SPADE), new Card(EIGHT, SPADE), new Card(NINE,
-                        SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE),
-                new Card(QUEEN, SPADE)));
+        goal.put(CLUB,
+                Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB), new Card(THREE, CLUB), new Card(FOUR, CLUB),
+                        new Card(FIVE, CLUB), new Card(SIX, CLUB), new Card(SEVEN, CLUB), new Card(EIGHT, CLUB),
+                        new Card(NINE, CLUB), new Card(TEN, CLUB), new Card(JACK, CLUB), new Card(QUEEN, CLUB),
+                        new Card(KING, CLUB)));
+        goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND), new Card(TWO, DIAMOND), new Card(THREE, DIAMOND),
+                new Card(FOUR, DIAMOND), new Card(FIVE, DIAMOND), new Card(SIX, DIAMOND), new Card(SEVEN, DIAMOND),
+                new Card(EIGHT, DIAMOND), new Card(NINE, DIAMOND), new Card(TEN, DIAMOND), new Card(JACK, DIAMOND),
+                new Card(QUEEN, DIAMOND), new Card(KING, DIAMOND)));
+        goal.put(HEART,
+                Arrays.asList(new Card(ACE, HEART), new Card(TWO, HEART), new Card(THREE, HEART), new Card(FOUR, HEART),
+                        new Card(FIVE, HEART), new Card(SIX, HEART), new Card(SEVEN, HEART), new Card(EIGHT, HEART),
+                        new Card(NINE, HEART), new Card(TEN, HEART), new Card(JACK, HEART), new Card(QUEEN, HEART),
+                        new Card(KING, HEART)));
+        goal.put(SPADE,
+                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE), new Card(THREE, SPADE), new Card(FOUR, SPADE),
+                        new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(SEVEN, SPADE), new Card(EIGHT, SPADE),
+                        new Card(NINE, SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(QUEEN, SPADE)));
         final Board board = new Board(piles, drawPile, 1, goal);
         
         assertFalse(solitaire.isWin(board));
@@ -438,11 +394,9 @@ public class SolitaireTest {
     
     @Test
     public void testFindAllMovesDoesNotReturnAdvanceDrawForEmptyDrawPile() {
-        final SolitaireMove move = new AdvanceDrawPileMove(0,
-                solitaire.getDrawAdvance());
+        final SolitaireMove move = new AdvanceDrawPileMove(0, solitaire.getDrawAdvance());
         
-        final Board board = new Board(emptyPiles, emptyListOfCards, 0,
-                emptyGoal);
+        final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
         
@@ -453,8 +407,7 @@ public class SolitaireTest {
     public void testFindAllMovesDoesNotReturnResetDrawForEmptyDrawPile() {
         final SolitaireMove move = new ResetDrawPileMove(0);
         
-        final Board board = new Board(emptyPiles, emptyListOfCards, 0,
-                emptyGoal);
+        final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
         
@@ -463,8 +416,7 @@ public class SolitaireTest {
     
     @Test
     public void testFindAllMovesReturnsAdvanceDraw() {
-        final SolitaireMove move = new AdvanceDrawPileMove(0,
-                solitaire.getDrawAdvance());
+        final SolitaireMove move = new AdvanceDrawPileMove(0, solitaire.getDrawAdvance());
         
         final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB));
         final Board board = new Board(emptyPiles, drawPile, 0, emptyGoal);
@@ -476,8 +428,7 @@ public class SolitaireTest {
     
     @Test
     public void testFindAllMovesDoesNotReturnAdvanceDrawAtEndOfDrawPile() {
-        final SolitaireMove move = new AdvanceDrawPileMove(1,
-                solitaire.getDrawAdvance());
+        final SolitaireMove move = new AdvanceDrawPileMove(1, solitaire.getDrawAdvance());
         
         final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB));
         final Board board = new Board(emptyPiles, drawPile, 1, emptyGoal);
@@ -513,11 +464,9 @@ public class SolitaireTest {
     
     @Test
     public void testFindAllMovesReturnsAdvanceDrawInMiddleOfDrawPile() {
-        final SolitaireMove move = new AdvanceDrawPileMove(1,
-                solitaire.getDrawAdvance());
+        final SolitaireMove move = new AdvanceDrawPileMove(1, solitaire.getDrawAdvance());
         
-        final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB),
-                new Card(SEVEN, SPADE));
+        final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB), new Card(SEVEN, SPADE));
         final Board board = new Board(emptyPiles, drawPile, 1, emptyGoal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
@@ -529,8 +478,7 @@ public class SolitaireTest {
     public void testFindAllMovesDoesNotReturnResetDrawInMiddleOfDrawPile() {
         final SolitaireMove move = new ResetDrawPileMove(1);
         
-        final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB),
-                new Card(SEVEN, SPADE));
+        final List<Card> drawPile = Arrays.asList(new Card(EIGHT, CLUB), new Card(SEVEN, SPADE));
         final Board board = new Board(emptyPiles, drawPile, 1, emptyGoal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
@@ -572,8 +520,7 @@ public class SolitaireTest {
         
         final List<Card> drawPile = Arrays.asList(card);
         final Map<Suit, List<Card>> goal = new EnumMap<>(emptyGoal);
-        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB),
-                new Card(THREE, CLUB)));
+        goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB), new Card(THREE, CLUB)));
         final Board board = new Board(emptyPiles, drawPile, 1, goal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
@@ -599,37 +546,28 @@ public class SolitaireTest {
     
     // @Test
     public void testFindAllMoves1() {
-        final List<Card> drawPile = Arrays.asList(new Card(THREE, CLUB),
-                new Card(QUEEN, DIAMOND), new Card(SEVEN, SPADE), new Card(
-                        EIGHT, CLUB), new Card(NINE, CLUB), new Card(EIGHT,
-                        DIAMOND), new Card(SEVEN, CLUB), new Card(JACK, CLUB),
-                new Card(KING, CLUB), new Card(EIGHT, HEART), new Card(SIX,
-                        CLUB), new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND),
-                new Card(QUEEN, CLUB), new Card(SEVEN, DIAMOND), new Card(JACK,
-                        DIAMOND));
+        final List<Card> drawPile = Arrays.asList(new Card(THREE, CLUB), new Card(QUEEN, DIAMOND),
+                new Card(SEVEN, SPADE), new Card(EIGHT, CLUB), new Card(NINE, CLUB), new Card(EIGHT, DIAMOND),
+                new Card(SEVEN, CLUB), new Card(JACK, CLUB), new Card(KING, CLUB), new Card(EIGHT, HEART),
+                new Card(SIX, CLUB), new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND), new Card(QUEEN, CLUB),
+                new Card(SEVEN, DIAMOND), new Card(JACK, DIAMOND));
         final Card nil = null;
         final List<Pile> piles = new ArrayList<>(7);
-        piles.add(new Pile(emptyListOfCards, Arrays.asList(new Card(SIX,
-                DIAMOND))));
-        piles.add(new Pile(Arrays.asList(nil), Arrays.asList(new Card(FOUR,
-                DIAMOND), new Card(THREE, SPADE), new Card(TWO, HEART))));
-        piles.add(new Pile(Arrays.asList(nil, nil), Arrays.asList(new Card(
-                NINE, DIAMOND), new Card(EIGHT, SPADE), new Card(SEVEN, HEART))));
-        piles.add(new Pile(Arrays.asList(nil, nil), Arrays.asList(new Card(
-                THREE, HEART))));
-        piles.add(new Pile(Arrays.asList(nil, nil, nil), Arrays.asList(
-                new Card(FIVE, HEART), new Card(FOUR, CLUB), new Card(THREE,
-                        DIAMOND))));
-        piles.add(new Pile(Arrays.asList(nil, nil, nil, nil, nil), Arrays
-                .asList(new Card(NINE, HEART))));
-        piles.add(new Pile(Arrays.asList(nil, nil, nil, nil, nil), Arrays
-                .asList(new Card(FOUR, HEART))));
+        piles.add(new Pile(emptyListOfCards, Arrays.asList(new Card(SIX, DIAMOND))));
+        piles.add(new Pile(Arrays.asList(nil),
+                Arrays.asList(new Card(FOUR, DIAMOND), new Card(THREE, SPADE), new Card(TWO, HEART))));
+        piles.add(new Pile(Arrays.asList(nil, nil),
+                Arrays.asList(new Card(NINE, DIAMOND), new Card(EIGHT, SPADE), new Card(SEVEN, HEART))));
+        piles.add(new Pile(Arrays.asList(nil, nil), Arrays.asList(new Card(THREE, HEART))));
+        piles.add(new Pile(Arrays.asList(nil, nil, nil),
+                Arrays.asList(new Card(FIVE, HEART), new Card(FOUR, CLUB), new Card(THREE, DIAMOND))));
+        piles.add(new Pile(Arrays.asList(nil, nil, nil, nil, nil), Arrays.asList(new Card(NINE, HEART))));
+        piles.add(new Pile(Arrays.asList(nil, nil, nil, nil, nil), Arrays.asList(new Card(FOUR, HEART))));
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         goal.put(CLUB, Arrays.asList(new Card(ACE, CLUB), new Card(TWO, CLUB)));
         goal.put(DIAMOND, Arrays.asList(new Card(ACE, DIAMOND)));
         goal.put(HEART, emptyListOfCards);
-        goal.put(SPADE,
-                Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE)));
+        goal.put(SPADE, Arrays.asList(new Card(ACE, SPADE), new Card(TWO, SPADE)));
         final Board board = new Board(piles, drawPile, 0, goal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);
@@ -639,38 +577,30 @@ public class SolitaireTest {
     
     // @Test
     public void testFindAllMoves2() {
-        final List<Card> drawPile = Arrays.asList(new Card(THREE, CLUB),
-                new Card(QUEEN, DIAMOND), new Card(SEVEN, SPADE), new Card(
-                        EIGHT, CLUB), new Card(NINE, CLUB), new Card(EIGHT,
-                        DIAMOND), new Card(SEVEN, CLUB),
-                new Card(ACE, DIAMOND), new Card(EIGHT, SPADE), new Card(JACK,
-                        CLUB), new Card(THREE, SPADE), new Card(ACE, CLUB),
-                new Card(KING, CLUB), new Card(ACE, SPADE), new Card(THREE,
-                        DIAMOND), new Card(EIGHT, HEART), new Card(TWO, HEART),
-                new Card(TWO, CLUB), new Card(SIX, CLUB),
-                new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND), new Card(
-                        QUEEN, CLUB), new Card(SEVEN, DIAMOND), new Card(JACK,
-                        DIAMOND));
+        final List<Card> drawPile = Arrays.asList(new Card(THREE, CLUB), new Card(QUEEN, DIAMOND),
+                new Card(SEVEN, SPADE), new Card(EIGHT, CLUB), new Card(NINE, CLUB), new Card(EIGHT, DIAMOND),
+                new Card(SEVEN, CLUB), new Card(ACE, DIAMOND), new Card(EIGHT, SPADE), new Card(JACK, CLUB),
+                new Card(THREE, SPADE), new Card(ACE, CLUB), new Card(KING, CLUB), new Card(ACE, SPADE),
+                new Card(THREE, DIAMOND), new Card(EIGHT, HEART), new Card(TWO, HEART), new Card(TWO, CLUB),
+                new Card(SIX, CLUB), new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND), new Card(QUEEN, CLUB),
+                new Card(SEVEN, DIAMOND), new Card(JACK, DIAMOND));
         final List<Pile> piles = new ArrayList<>(7);
-        piles.add(new Pile(emptyListOfCards, Arrays.asList(new Card(SIX,
-                DIAMOND))));
-        piles.add(new Pile(Arrays.asList(new Card(NINE, SPADE)), Arrays
-                .asList(new Card(FOUR, DIAMOND))));
-        piles.add(new Pile(Arrays.asList(new Card(QUEEN, HEART), new Card(TWO,
-                DIAMOND)), Arrays.asList(new Card(NINE, DIAMOND))));
-        piles.add(new Pile(Arrays.asList(new Card(FOUR, SPADE), new Card(FIVE,
-                SPADE), new Card(THREE, HEART)), Arrays.asList(new Card(FOUR,
-                CLUB))));
-        piles.add(new Pile(Arrays.asList(new Card(JACK, HEART), new Card(SIX,
-                SPADE), new Card(ACE, HEART), new Card(FIVE, HEART)), Arrays
-                .asList(new Card(TWO, SPADE))));
-        piles.add(new Pile(Arrays.asList(new Card(TEN, DIAMOND), new Card(KING,
-                SPADE), new Card(TEN, SPADE), new Card(JACK, SPADE), new Card(
-                KING, HEART)), Arrays.asList(new Card(NINE, HEART))));
-        piles.add(new Pile(Arrays.asList(new Card(FIVE, CLUB), new Card(KING,
-                DIAMOND), new Card(TEN, CLUB), new Card(TEN, HEART), new Card(
-                SIX, HEART), new Card(FOUR, HEART)), Arrays.asList(new Card(
-                SEVEN, HEART))));
+        piles.add(new Pile(emptyListOfCards, Arrays.asList(new Card(SIX, DIAMOND))));
+        piles.add(new Pile(Arrays.asList(new Card(NINE, SPADE)), Arrays.asList(new Card(FOUR, DIAMOND))));
+        piles.add(new Pile(Arrays.asList(new Card(QUEEN, HEART), new Card(TWO, DIAMOND)),
+                Arrays.asList(new Card(NINE, DIAMOND))));
+        piles.add(new Pile(Arrays.asList(new Card(FOUR, SPADE), new Card(FIVE, SPADE), new Card(THREE, HEART)),
+                Arrays.asList(new Card(FOUR, CLUB))));
+        piles.add(new Pile(
+                Arrays.asList(new Card(JACK, HEART), new Card(SIX, SPADE), new Card(ACE, HEART), new Card(FIVE, HEART)),
+                Arrays.asList(new Card(TWO, SPADE))));
+        piles.add(new Pile(Arrays.asList(new Card(TEN, DIAMOND), new Card(KING, SPADE), new Card(TEN, SPADE),
+                new Card(JACK, SPADE), new Card(KING, HEART)), Arrays.asList(new Card(NINE, HEART))));
+        piles.add(
+                new Pile(
+                        Arrays.asList(new Card(FIVE, CLUB), new Card(KING, DIAMOND), new Card(TEN, CLUB),
+                                new Card(TEN, HEART), new Card(SIX, HEART), new Card(FOUR, HEART)),
+                        Arrays.asList(new Card(SEVEN, HEART))));
         final Board board = new Board(piles, drawPile, 0, emptyGoal);
         
         final Collection<SolitaireMove> moves = solitaire.findAllMoves(board);

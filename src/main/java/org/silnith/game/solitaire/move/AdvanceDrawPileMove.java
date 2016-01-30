@@ -5,6 +5,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class AdvanceDrawPileMove implements SolitaireMove {
     
     private final int beginningIndex;
@@ -27,8 +28,7 @@ public class AdvanceDrawPileMove implements SolitaireMove {
     
     public AdvanceDrawPileMove coalesce(final AdvanceDrawPileMove next) {
         assert beginningIndex + increment == next.beginningIndex;
-        return new AdvanceDrawPileMove(beginningIndex, increment
-                + next.increment);
+        return new AdvanceDrawPileMove(beginningIndex, increment + next.increment);
     }
     
     @Override
@@ -48,16 +48,14 @@ public class AdvanceDrawPileMove implements SolitaireMove {
     
     @Override
     public int hashCode() {
-        return Integer.rotateLeft(beginningIndex, 24)
-                ^ Integer.rotateLeft(increment, 8);
+        return Integer.rotateLeft(beginningIndex, 24) ^ Integer.rotateLeft(increment, 8);
     }
     
     @Override
     public boolean equals(final Object obj) {
         if (obj instanceof AdvanceDrawPileMove) {
             final AdvanceDrawPileMove move = (AdvanceDrawPileMove) obj;
-            return beginningIndex == move.beginningIndex
-                    && increment == move.increment;
+            return beginningIndex == move.beginningIndex && increment == move.increment;
         } else {
             return false;
         }

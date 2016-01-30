@@ -45,6 +45,7 @@ import org.silnith.game.solitaire.move.SolitaireMove;
 import org.silnith.game.solitaire.move.StackMove;
 import org.silnith.util.LinkedNode;
 
+
 public class Solitaire implements Game<SolitaireMove, Board> {
     
     private final int numberOfStacks;
@@ -69,13 +70,12 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * default.
      * 
      * @param numberOfStacks
-     *            the number of stacks in the game
+     *        the number of stacks in the game
      * @param boardValidator
-     *            the board validator
+     *        the board validator
      */
     @Inject
-    public Solitaire(final int numberOfStacks,
-            final BoardValidator boardValidator) {
+    public Solitaire(final int numberOfStacks, final BoardValidator boardValidator) {
         super();
         this.numberOfStacks = numberOfStacks;
         this.drawAdvance = 3;
@@ -113,7 +113,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Sets the number of cards to flip at once when the draw pile is advanced.
      * 
      * @param drawAdvance
-     *            the number of cards to flip for each advance of the draw pile
+     *        the number of cards to flip for each advance of the draw pile
      */
     public void setDrawAdvance(final int drawAdvance) {
         if (drawAdvance <= 0) {
@@ -130,7 +130,6 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * for each empty pile if this is {@code true}. If this is {@code false},
      * {@link #findAllMoves(Board)} will only return a single move representing
      * the move of the king to an empty pile.
-     * 
      * <p>
      * In less precise terms, this represents whether a human would consider
      * moves returned by {@link #findAllMoves(Board)} to be redundant. For
@@ -153,7 +152,6 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * each empty pile if this is {@code true}. If this is {@code false},
      * {@link #findAllMoves(Board)} will only return a single move representing
      * the move of the king to an empty pile.
-     * 
      * <p>
      * In less precise terms, this represents whether a human would consider
      * moves returned by {@link #findAllMoves(Board)} to be redundant. For
@@ -162,8 +160,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * to {@code false}.
      * 
      * @param returnRedundantMoves
-     *            whether {@link #findAllMoves(Board)} will return more than one
-     *            move that can result in an equivalent game state
+     *        whether {@link #findAllMoves(Board)} will return more than one
+     *        move that can result in an equivalent game state
      */
     public void setReturnRedundantMoves(final boolean returnRedundantMoves) {
         this.returnRedundantMoves = returnRedundantMoves;
@@ -190,7 +188,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * of cards into a new game of solitaire.
      * 
      * @param deck
-     *            the deck of cards to deal
+     *        the deck of cards to deal
      * @return a {@link SolitaireMove} representing the dealing of the cards
      */
     public DealMove dealMove(final List<Card> deck) {
@@ -201,7 +199,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns the board that results from the provided deal.
      * 
      * @param move
-     *            a move representing dealing a deck into a game of solitaire
+     *        a move representing dealing a deck into a game of solitaire
      * @return the initial board after the deal
      */
     public Board deal(final DealMove move) {
@@ -213,7 +211,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * into a new game of solitaire.
      * 
      * @param deck
-     *            the deck of cards to deal
+     *        the deck of cards to deal
      * @return the initial board after the deal
      */
     public Board deal(final List<Card> deck) {
@@ -227,7 +225,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * moves.
      * 
      * @param board
-     *            the board to validate
+     *        the board to validate
      */
     public void validate(final Board board) {
         boardValidator.validate(board);
@@ -237,9 +235,9 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Applies the move to the given board and returns a new board.
      * 
      * @param move
-     *            the move to apply
+     *        the move to apply
      * @param board
-     *            the board to apply the move to
+     *        the board to apply the move to
      * @return the new board state
      */
     public Board applyMove(final SolitaireMove move, final Board board) {
@@ -258,10 +256,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
         piles.add(new Pile(null, null));
         piles.add(new Pile(null, null));
         piles.add(new Pile(null, null));
-        piles.add(new Pile(null, Collections
-                .singletonList(new Card(KING, SPADE))));
-        final List<Card> draw = Collections
-                .singletonList(new Card(KING, HEART));
+        piles.add(new Pile(null, Collections.singletonList(new Card(KING, SPADE))));
+        final List<Card> draw = Collections.singletonList(new Card(KING, HEART));
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         final List<Value> values = Arrays.asList(Value.values());
         final List<Card> clubs = new ArrayList<>(13);
@@ -293,34 +289,29 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      */
     protected Board winningBoard() {
         final List<Pile> piles = new ArrayList<>(7);
-        piles.add(new Pile(null, Arrays.asList(new Card(KING, CLUB), new Card(
-                QUEEN, DIAMOND), new Card(JACK, CLUB), new Card(TEN, DIAMOND),
-                new Card(NINE, CLUB), new Card(EIGHT, DIAMOND), new Card(SEVEN,
-                        CLUB), new Card(SIX, DIAMOND), new Card(FIVE, CLUB),
-                new Card(FOUR, DIAMOND), new Card(THREE, CLUB), new Card(TWO,
-                        DIAMOND), new Card(ACE, CLUB))));
+        piles.add(new Pile(null,
+                Arrays.asList(new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
+                        new Card(TEN, DIAMOND), new Card(NINE, CLUB), new Card(EIGHT, DIAMOND), new Card(SEVEN, CLUB),
+                        new Card(SIX, DIAMOND), new Card(FIVE, CLUB), new Card(FOUR, DIAMOND), new Card(THREE, CLUB),
+                        new Card(TWO, DIAMOND), new Card(ACE, CLUB))));
         piles.add(new Pile(null, null));
-        piles.add(new Pile(null, Arrays.asList(new Card(KING, DIAMOND),
-                new Card(QUEEN, CLUB), new Card(JACK, DIAMOND), new Card(TEN,
-                        CLUB), new Card(NINE, DIAMOND), new Card(EIGHT, CLUB),
-                new Card(SEVEN, DIAMOND), new Card(SIX, CLUB), new Card(FIVE,
-                        DIAMOND), new Card(FOUR, CLUB),
-                new Card(THREE, DIAMOND), new Card(TWO, CLUB), new Card(ACE,
-                        DIAMOND))));
+        piles.add(new Pile(null,
+                Arrays.asList(new Card(KING, DIAMOND), new Card(QUEEN, CLUB), new Card(JACK, DIAMOND),
+                        new Card(TEN, CLUB), new Card(NINE, DIAMOND), new Card(EIGHT, CLUB), new Card(SEVEN, DIAMOND),
+                        new Card(SIX, CLUB), new Card(FIVE, DIAMOND), new Card(FOUR, CLUB), new Card(THREE, DIAMOND),
+                        new Card(TWO, CLUB), new Card(ACE, DIAMOND))));
         piles.add(new Pile(null, null));
-        piles.add(new Pile(null, Arrays.asList(new Card(KING, SPADE), new Card(
-                QUEEN, HEART), new Card(JACK, SPADE), new Card(TEN, HEART),
-                new Card(NINE, SPADE), new Card(EIGHT, HEART), new Card(SEVEN,
-                        SPADE), new Card(SIX, HEART), new Card(FIVE, SPADE),
-                new Card(FOUR, HEART), new Card(THREE, SPADE), new Card(TWO,
-                        HEART), new Card(ACE, SPADE))));
+        piles.add(new Pile(null,
+                Arrays.asList(new Card(KING, SPADE), new Card(QUEEN, HEART), new Card(JACK, SPADE),
+                        new Card(TEN, HEART), new Card(NINE, SPADE), new Card(EIGHT, HEART), new Card(SEVEN, SPADE),
+                        new Card(SIX, HEART), new Card(FIVE, SPADE), new Card(FOUR, HEART), new Card(THREE, SPADE),
+                        new Card(TWO, HEART), new Card(ACE, SPADE))));
         piles.add(new Pile(null, null));
-        piles.add(new Pile(null, Arrays.asList(new Card(KING, HEART), new Card(
-                QUEEN, SPADE), new Card(JACK, HEART), new Card(TEN, SPADE),
-                new Card(NINE, HEART), new Card(EIGHT, SPADE), new Card(SEVEN,
-                        HEART), new Card(SIX, SPADE), new Card(FIVE, HEART),
-                new Card(FOUR, SPADE), new Card(THREE, HEART), new Card(TWO,
-                        SPADE), new Card(ACE, HEART))));
+        piles.add(new Pile(null,
+                Arrays.asList(new Card(KING, HEART), new Card(QUEEN, SPADE), new Card(JACK, HEART),
+                        new Card(TEN, SPADE), new Card(NINE, HEART), new Card(EIGHT, SPADE), new Card(SEVEN, HEART),
+                        new Card(SIX, SPADE), new Card(FIVE, HEART), new Card(FOUR, SPADE), new Card(THREE, HEART),
+                        new Card(TWO, SPADE), new Card(ACE, HEART))));
         final List<Card> drawPile = Collections.emptyList();
         final Map<Suit, List<Card>> goal = new EnumMap<>(Suit.class);
         goal.put(CLUB, Collections.<Card> emptyList());
@@ -336,60 +327,42 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * guaranteed to be winnable.
      */
     protected List<Card> winningDeck() {
-        final List<Card> deck = Arrays.asList(new Card(ACE, CLUB), new Card(
-                THREE, CLUB), new Card(SIX, CLUB), new Card(TEN, CLUB),
-                new Card(KING, CLUB), new Card(SEVEN, DIAMOND), new Card(KING,
-                        DIAMOND), new Card(TWO, CLUB), new Card(FIVE, CLUB),
-                new Card(NINE, CLUB), new Card(QUEEN, CLUB), new Card(SIX,
-                        DIAMOND), new Card(QUEEN, DIAMOND),
-                new Card(FOUR, CLUB), new Card(EIGHT, CLUB), new Card(JACK,
-                        CLUB), new Card(FIVE, DIAMOND),
-                new Card(JACK, DIAMOND), new Card(SEVEN, CLUB), new Card(TWO,
-                        DIAMOND), new Card(FOUR, DIAMOND), new Card(TEN,
-                        DIAMOND), new Card(ACE, DIAMOND), new Card(THREE,
-                        DIAMOND), new Card(NINE, DIAMOND),
-                new Card(ACE, HEART), new Card(EIGHT, DIAMOND), new Card(ACE,
-                        SPADE), new Card(KING, HEART), new Card(QUEEN, HEART),
-                new Card(JACK, HEART), new Card(TEN, HEART), new Card(NINE,
-                        HEART), new Card(EIGHT, HEART), new Card(SEVEN, HEART),
-                new Card(SIX, HEART), new Card(FIVE, HEART), new Card(FOUR,
-                        HEART), new Card(THREE, HEART), new Card(TWO, HEART),
-                new Card(KING, SPADE), new Card(QUEEN, SPADE), new Card(JACK,
-                        SPADE), new Card(TEN, SPADE), new Card(NINE, SPADE),
-                new Card(EIGHT, SPADE), new Card(SEVEN, SPADE), new Card(SIX,
-                        SPADE), new Card(FIVE, SPADE), new Card(FOUR, SPADE),
-                new Card(THREE, SPADE), new Card(TWO, SPADE));
-        
+        final List<Card> deck = Arrays.asList(new Card(ACE, CLUB), new Card(THREE, CLUB), new Card(SIX, CLUB),
+                new Card(TEN, CLUB), new Card(KING, CLUB), new Card(SEVEN, DIAMOND), new Card(KING, DIAMOND),
+                new Card(TWO, CLUB), new Card(FIVE, CLUB), new Card(NINE, CLUB), new Card(QUEEN, CLUB),
+                new Card(SIX, DIAMOND), new Card(QUEEN, DIAMOND), new Card(FOUR, CLUB), new Card(EIGHT, CLUB),
+                new Card(JACK, CLUB), new Card(FIVE, DIAMOND), new Card(JACK, DIAMOND), new Card(SEVEN, CLUB),
+                new Card(TWO, DIAMOND), new Card(FOUR, DIAMOND), new Card(TEN, DIAMOND), new Card(ACE, DIAMOND),
+                new Card(THREE, DIAMOND), new Card(NINE, DIAMOND), new Card(ACE, HEART), new Card(EIGHT, DIAMOND),
+                new Card(ACE, SPADE), new Card(KING, HEART), new Card(QUEEN, HEART), new Card(JACK, HEART),
+                new Card(TEN, HEART), new Card(NINE, HEART), new Card(EIGHT, HEART), new Card(SEVEN, HEART),
+                new Card(SIX, HEART), new Card(FIVE, HEART), new Card(FOUR, HEART), new Card(THREE, HEART),
+                new Card(TWO, HEART), new Card(KING, SPADE), new Card(QUEEN, SPADE), new Card(JACK, SPADE),
+                new Card(TEN, SPADE), new Card(NINE, SPADE), new Card(EIGHT, SPADE), new Card(SEVEN, SPADE),
+                new Card(SIX, SPADE), new Card(FIVE, SPADE), new Card(FOUR, SPADE), new Card(THREE, SPADE),
+                new Card(TWO, SPADE));
+                
         assert deck.size() == 52;
         
         return deck;
     }
     
     protected List<Card> unknownDeck1() {
-        final List<Card> deck = Arrays.asList(new Card(SIX, DIAMOND), new Card(
-                NINE, SPADE), new Card(QUEEN, HEART), new Card(FOUR, SPADE),
-                new Card(JACK, HEART), new Card(TEN, DIAMOND), new Card(FIVE,
-                        CLUB), new Card(FOUR, DIAMOND), new Card(TWO, DIAMOND),
-                new Card(FIVE, SPADE), new Card(SIX, SPADE), new Card(KING,
-                        SPADE), new Card(KING, DIAMOND),
-                new Card(NINE, DIAMOND), new Card(THREE, HEART), new Card(ACE,
-                        HEART), new Card(TEN, SPADE), new Card(TEN, CLUB),
-                new Card(FOUR, CLUB), new Card(FIVE, HEART), new Card(JACK,
-                        SPADE), new Card(TEN, HEART), new Card(TWO, SPADE),
-                new Card(KING, HEART), new Card(SIX, HEART), new Card(NINE,
-                        HEART), new Card(FOUR, HEART), new Card(SEVEN, HEART),
-                new Card(THREE, CLUB), new Card(QUEEN, DIAMOND), new Card(
-                        SEVEN, SPADE), new Card(EIGHT, CLUB), new Card(NINE,
-                        CLUB), new Card(EIGHT, DIAMOND), new Card(SEVEN, CLUB),
-                new Card(ACE, DIAMOND), new Card(EIGHT, SPADE), new Card(JACK,
-                        CLUB), new Card(THREE, SPADE), new Card(ACE, CLUB),
-                new Card(KING, CLUB), new Card(ACE, SPADE), new Card(THREE,
-                        DIAMOND), new Card(EIGHT, HEART), new Card(TWO, HEART),
-                new Card(TWO, CLUB), new Card(SIX, CLUB),
-                new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND), new Card(
-                        QUEEN, CLUB), new Card(SEVEN, DIAMOND), new Card(JACK,
-                        DIAMOND));
-        
+        final List<Card> deck = Arrays.asList(new Card(SIX, DIAMOND), new Card(NINE, SPADE), new Card(QUEEN, HEART),
+                new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(TEN, DIAMOND), new Card(FIVE, CLUB),
+                new Card(FOUR, DIAMOND), new Card(TWO, DIAMOND), new Card(FIVE, SPADE), new Card(SIX, SPADE),
+                new Card(KING, SPADE), new Card(KING, DIAMOND), new Card(NINE, DIAMOND), new Card(THREE, HEART),
+                new Card(ACE, HEART), new Card(TEN, SPADE), new Card(TEN, CLUB), new Card(FOUR, CLUB),
+                new Card(FIVE, HEART), new Card(JACK, SPADE), new Card(TEN, HEART), new Card(TWO, SPADE),
+                new Card(KING, HEART), new Card(SIX, HEART), new Card(NINE, HEART), new Card(FOUR, HEART),
+                new Card(SEVEN, HEART), new Card(THREE, CLUB), new Card(QUEEN, DIAMOND), new Card(SEVEN, SPADE),
+                new Card(EIGHT, CLUB), new Card(NINE, CLUB), new Card(EIGHT, DIAMOND), new Card(SEVEN, CLUB),
+                new Card(ACE, DIAMOND), new Card(EIGHT, SPADE), new Card(JACK, CLUB), new Card(THREE, SPADE),
+                new Card(ACE, CLUB), new Card(KING, CLUB), new Card(ACE, SPADE), new Card(THREE, DIAMOND),
+                new Card(EIGHT, HEART), new Card(TWO, HEART), new Card(TWO, CLUB), new Card(SIX, CLUB),
+                new Card(QUEEN, SPADE), new Card(FIVE, DIAMOND), new Card(QUEEN, CLUB), new Card(SEVEN, DIAMOND),
+                new Card(JACK, DIAMOND));
+                
         assert deck.size() == 52;
         
         return deck;
@@ -401,9 +374,9 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * opposite color to the provided card.
      * 
      * @param card
-     *            the card to potentially put on the pile
+     *        the card to potentially put on the pile
      * @param pile
-     *            the pile of cards that is to receive the card
+     *        the pile of cards that is to receive the card
      * @return whether this is a legal move
      */
     protected boolean canAddToPile(final Card card, final Pile pile) {
@@ -416,22 +389,21 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * the opposite color to the first card in the provided stack of cards.
      * 
      * @param cards
-     *            the stack of cards to potentially put on the pile
+     *        the stack of cards to potentially put on the pile
      * @param pile
-     *            the pile of cards that is to receive the stack
+     *        the pile of cards that is to receive the stack
      * @return whether this is a legal move
      */
     protected boolean canAddToPile(final List<Card> cards, final Pile pile) {
         final Card cardToAdd = cards.get(0);
-        if (!pile.hasFaceUpCards()) {
+        if ( !pile.hasFaceUpCards()) {
             return cardToAdd.getValue() == Value.KING;
         }
         
         final Card topCard = pile.getTopCard();
         
         if (topCard.getSuit().getColor() != cardToAdd.getSuit().getColor()
-                && topCard.getValue().getValue() == 1 + cardToAdd.getValue()
-                        .getValue()) {
+                && topCard.getValue().getValue() == 1 + cardToAdd.getValue().getValue()) {
             return true;
         } else {
             return false;
@@ -442,13 +414,12 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns the top card in the goal for the given suit.
      * 
      * @param suit
-     *            the suit to check
+     *        the suit to check
      * @param goal
-     *            the goal
+     *        the goal
      * @return the top card from the goal for {@code suit}
      */
-    protected Card getTopOfGoal(final Suit suit,
-            final Map<Suit, List<Card>> goal) {
+    protected Card getTopOfGoal(final Suit suit, final Map<Suit, List<Card>> goal) {
         final List<Card> goalForSuit = goal.get(suit);
         
         final Card topOfGoal = goalForSuit.get(goalForSuit.size() - 1);
@@ -460,13 +431,12 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns whether the given card can be added to the goal.
      * 
      * @param card
-     *            the card to add to the goal
+     *        the card to add to the goal
      * @param goal
-     *            the goal
+     *        the goal
      * @return whether this is a legal move
      */
-    protected boolean canAddToGoal(final Card card,
-            final Map<Suit, List<Card>> goal) {
+    protected boolean canAddToGoal(final Card card, final Map<Suit, List<Card>> goal) {
         final Suit suit = card.getSuit();
         final List<Card> goalForSuit = goal.get(suit);
         
@@ -488,15 +458,14 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * on top of the given card.
      * 
      * @param suit
-     *            the suit in the goal from which to draw
+     *        the suit in the goal from which to draw
      * @param goal
-     *            the goal
+     *        the goal
      * @param card
-     *            the card to stack on
+     *        the card to stack on
      * @return whether this is a legal move
      */
-    protected boolean canTakeFromGoal(final Suit suit,
-            final Map<Suit, List<Card>> goal, final Card card) {
+    protected boolean canTakeFromGoal(final Suit suit, final Map<Suit, List<Card>> goal, final Card card) {
         if (card.getSuit().getColor() == suit.getColor()) {
             return false;
         }
@@ -520,7 +489,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns whether the given board is a game of solitaire that has been won.
      * 
      * @param currentBoard
-     *            the board to check
+     *        the board to check
      * @return {@code true} if all the cards in the given board have been moved
      *         to the goal
      */
@@ -544,12 +513,11 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * in virtually equivalent board states.
      * 
      * @param state
-     *            the game state to search for legal moves
+     *        the game state to search for legal moves
      * @return a collection of legal moves for the given game
      */
     @Override
-    public Collection<SolitaireMove> findAllMoves(
-            final GameState<SolitaireMove, Board> state) {
+    public Collection<SolitaireMove> findAllMoves(final GameState<SolitaireMove, Board> state) {
         return findAllMoves(state.getBoards().get(0));
     }
     
@@ -561,7 +529,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * in virtually equivalent board states.
      * 
      * @param currentBoard
-     *            the board to search for legal moves
+     *        the board to search for legal moves
      * @return a collection of legal moves for the given board
      */
     public Collection<SolitaireMove> findAllMoves(final Board currentBoard) {
@@ -587,11 +555,10 @@ public class Solitaire implements Game<SolitaireMove, Board> {
              * If all the goal stacks are up to 4, then there is no reason to
              * keep any card 6 or lower on the board.
              */
-            if (returnRedundantMoves
-                    || card.getValue().getValue() > minGoalStack + 2) {
+            if (returnRedundantMoves || card.getValue().getValue() > minGoalStack + 2) {
                 // Can we draw it to one of the piles?
                 final boolean isKing = card.getValue() == Value.KING;
-                for (int i = 0; i < piles.size(); i++) {
+                for (int i = 0; i < piles.size(); i++ ) {
                     if (canAddToPile(card, piles.get(i))) {
                         moves.add(new DrawToPileMove(drawIndex, i, card));
                         if (isKing && !returnRedundantMoves) {
@@ -602,9 +569,9 @@ public class Solitaire implements Game<SolitaireMove, Board> {
                 }
             }
         }
-        for (int i = 0; i < piles.size(); i++) {
+        for (int i = 0; i < piles.size(); i++ ) {
             final Pile sourcePile = piles.get(i);
-            if (!sourcePile.hasFaceUpCards()) {
+            if ( !sourcePile.hasFaceUpCards()) {
                 assert !sourcePile.hasFaceDownCards();
                 continue;
             }
@@ -645,20 +612,20 @@ public class Solitaire implements Game<SolitaireMove, Board> {
             /*
              * Check whether we can move cards from one pile to another pile.
              */
-            for (int j = 0; j < piles.size(); j++) {
+            for (int j = 0; j < piles.size(); j++ ) {
                 if (i == j) {
                     continue;
                 }
                 
                 // check if we can move cards from stack i to stack j
                 final Pile destinationPile = piles.get(j);
-                if (!destinationPile.hasFaceUpCards()) {
+                if ( !destinationPile.hasFaceUpCards()) {
                     // can only move a King here
                     assert !destinationPile.hasFaceDownCards();
                     
-                    if (!sourcePile.hasFaceDownCards() && !returnRedundantMoves) {
+                    if ( !sourcePile.hasFaceDownCards() && !returnRedundantMoves) {
                         // No reason to move a King when it is not on top of
-// another card.
+                        // another card.
                         continue;
                     }
                     
@@ -667,21 +634,17 @@ public class Solitaire implements Game<SolitaireMove, Board> {
                     }
                 } else {
                     // destination has cards already, can only move source
-// card(s) that are lower value and of the right color
-                    final Card destinationTopCard = destinationPile
-                            .getTopCard();
-                    final Value destinationValue = destinationTopCard
-                            .getValue();
+                    // card(s) that are lower value and of the right color
+                    final Card destinationTopCard = destinationPile.getTopCard();
+                    final Value destinationValue = destinationTopCard.getValue();
                     final int targetValue = destinationValue.getValue() - 1;
                     
                     if (min <= targetValue && max >= targetValue) {
                         final int numCards = targetValue - min + 1;
                         
-                        final List<Card> stackToMove = sourcePile
-                                .getTopCards(numCards);
+                        final List<Card> stackToMove = sourcePile.getTopCards(numCards);
                         
-                        final Suit destinationSuit = destinationTopCard
-                                .getSuit();
+                        final Suit destinationSuit = destinationTopCard.getSuit();
                         final Suit suitToMove = stackToMove.get(0).getSuit();
                         if (destinationSuit.getColor() != suitToMove.getColor()) {
                             moves.add(new StackMove(i, j, numCards, stackToMove));
@@ -704,8 +667,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     }
     
     @Override
-    public GameState<SolitaireMove, Board> pruneGameState(
-            final GameState<SolitaireMove, Board> state) {
+    public GameState<SolitaireMove, Board> pruneGameState(final GameState<SolitaireMove, Board> state) {
         final SolitaireMove possibleMove = state.getMoves().getFirst();
         final LinkedNode<SolitaireMove> pastMoves = state.getMoves().getNext();
         final Board possibleBoard = state.getBoards().getFirst();
@@ -740,16 +702,13 @@ public class Solitaire implements Game<SolitaireMove, Board> {
          * them with a single coalesced "advance N" move. This does not prune
          * the search space, but it does make checking for cycles faster.
          */
-        if (possibleMove instanceof AdvanceDrawPileMove
-                && currentMove instanceof AdvanceDrawPileMove) {
+        if (possibleMove instanceof AdvanceDrawPileMove && currentMove instanceof AdvanceDrawPileMove) {
             final AdvanceDrawPileMove currentAdvance = (AdvanceDrawPileMove) currentMove;
             final AdvanceDrawPileMove possibleAdvance = (AdvanceDrawPileMove) possibleMove;
-            final SolitaireMove coalescedMove = currentAdvance
-                    .coalesce(possibleAdvance);
-            final LinkedNode<SolitaireMove> newMovesList = new LinkedNode<SolitaireMove>(
-                    coalescedMove, pastMoves.getNext());
-            final LinkedNode<Board> newBoardsList = new LinkedNode<Board>(
-                    possibleBoard, pastBoards.getNext());
+            final SolitaireMove coalescedMove = currentAdvance.coalesce(possibleAdvance);
+            final LinkedNode<SolitaireMove> newMovesList =
+                    new LinkedNode<SolitaireMove>(coalescedMove, pastMoves.getNext());
+            final LinkedNode<Board> newBoardsList = new LinkedNode<Board>(possibleBoard, pastBoards.getNext());
             drawAdvancesCoalesced.incrementAndGet();
             return new GameState<>(newMovesList, newBoardsList);
         }
@@ -757,17 +716,14 @@ public class Solitaire implements Game<SolitaireMove, Board> {
         return state;
     }
     
-    private boolean searchTreeHasCycle(final LinkedNode<Board> pastBoards,
-            final Board possibleBoard) {
+    private boolean searchTreeHasCycle(final LinkedNode<Board> pastBoards, final Board possibleBoard) {
         return pastBoards.contains(possibleBoard);
     }
     
-    private boolean shouldPruneDueToStackMoveAfterDrawAdvance(
-            final SolitaireMove currentMove, final SolitaireMove possibleMove) {
-        if (currentMove instanceof AdvanceDrawPileMove
-                || currentMove instanceof ResetDrawPileMove) {
-            if (possibleMove instanceof StackMove
-                    || possibleMove instanceof PileToGoalMove) {
+    private boolean shouldPruneDueToStackMoveAfterDrawAdvance(final SolitaireMove currentMove,
+            final SolitaireMove possibleMove) {
+        if (currentMove instanceof AdvanceDrawPileMove || currentMove instanceof ResetDrawPileMove) {
+            if (possibleMove instanceof StackMove || possibleMove instanceof PileToGoalMove) {
                 return true;
             }
         }

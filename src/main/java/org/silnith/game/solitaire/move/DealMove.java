@@ -5,6 +5,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class DealMove implements SolitaireMove {
     
     private final int numberOfStacks;
@@ -49,9 +50,7 @@ public class DealMove implements SolitaireMove {
     public boolean equals(final Object obj) {
         if (obj instanceof DealMove) {
             final DealMove move = (DealMove) obj;
-            return numberOfStacks == move.numberOfStacks
-                    && deck.size() == move.deck.size()
-                    && deck.equals(move.deck);
+            return numberOfStacks == move.numberOfStacks && deck.size() == move.deck.size() && deck.equals(move.deck);
         } else {
             return false;
         }

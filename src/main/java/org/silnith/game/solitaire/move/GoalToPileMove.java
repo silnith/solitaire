@@ -6,6 +6,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class GoalToPileMove implements SolitaireMove {
     
     private final int destinationPile;
@@ -50,8 +51,7 @@ public class GoalToPileMove implements SolitaireMove {
     public boolean equals(final Object obj) {
         if (obj instanceof GoalToPileMove) {
             final GoalToPileMove move = (GoalToPileMove) obj;
-            return destinationPile == move.destinationPile
-                    && card.equals(move.card);
+            return destinationPile == move.destinationPile && card.equals(move.card);
         } else {
             return false;
         }

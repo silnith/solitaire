@@ -6,6 +6,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class DrawToPileMove implements SolitaireMove {
     
     private final int sourceIndex;
@@ -14,8 +15,7 @@ public class DrawToPileMove implements SolitaireMove {
     
     private final Card card;
     
-    public DrawToPileMove(final int sourceIndex, final int destinationPile,
-            final Card card) {
+    public DrawToPileMove(final int sourceIndex, final int destinationPile, final Card card) {
         super();
         this.sourceIndex = sourceIndex;
         this.destinationPile = destinationPile;
@@ -58,9 +58,7 @@ public class DrawToPileMove implements SolitaireMove {
     public boolean equals(final Object obj) {
         if (obj instanceof DrawToPileMove) {
             final DrawToPileMove move = (DrawToPileMove) obj;
-            return sourceIndex == move.sourceIndex
-                    && destinationPile == move.destinationPile
-                    && card.equals(move.card);
+            return sourceIndex == move.sourceIndex && destinationPile == move.destinationPile && card.equals(move.card);
         } else {
             return false;
         }
@@ -68,8 +66,7 @@ public class DrawToPileMove implements SolitaireMove {
     
     @Override
     public String toString() {
-        return "Move " + card + " from draw pile index " + sourceIndex
-                + " to pile " + destinationPile + ".";
+        return "Move " + card + " from draw pile index " + sourceIndex + " to pile " + destinationPile + ".";
     }
     
 }

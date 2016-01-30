@@ -6,14 +6,14 @@ import java.util.List;
 
 import org.silnith.deck.Card;
 
+
 public class Pile {
     
     private final List<Card> faceDown;
     
     private final List<Card> faceUp;
     
-    public Pile(List<? extends Card> faceDownCards,
-            List<? extends Card> faceUpCards) {
+    public Pile(List<? extends Card> faceDownCards, List<? extends Card> faceUpCards) {
         super();
         if (faceDownCards == null) {
             faceDownCards = Collections.emptyList();
@@ -94,8 +94,7 @@ public class Pile {
         if (newCards.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        final List<Card> newFaceUp = new ArrayList<>(faceUp.size()
-                + newCards.size());
+        final List<Card> newFaceUp = new ArrayList<>(faceUp.size() + newCards.size());
         newFaceUp.addAll(faceUp);
         newFaceUp.addAll(newCards);
         return new Pile(faceDown, newFaceUp);
@@ -113,8 +112,7 @@ public class Pile {
     
     @Override
     public int hashCode() {
-        return 0x1280ce7a ^ faceDown.hashCode()
-                ^ Integer.rotateLeft(faceUp.hashCode(), 16);
+        return 0x1280ce7a ^ faceDown.hashCode() ^ Integer.rotateLeft(faceUp.hashCode(), 16);
     }
     
     @Override

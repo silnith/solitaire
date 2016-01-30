@@ -9,6 +9,7 @@ import org.silnith.deck.Card;
 import org.silnith.deck.Suit;
 import org.silnith.game.Validator;
 
+
 public class BoardValidator implements Validator<Board> {
     
     private final int numberOfPiles;
@@ -20,8 +21,8 @@ public class BoardValidator implements Validator<Board> {
     private final GoalValidator goalValidator;
     
     @Inject
-    public BoardValidator(final int numberOfPiles, final int deckSize,
-            final PileValidator pileValidator, final GoalValidator goalValidator) {
+    public BoardValidator(final int numberOfPiles, final int deckSize, final PileValidator pileValidator,
+            final GoalValidator goalValidator) {
         super();
         this.numberOfPiles = numberOfPiles;
         this.deckSize = deckSize;
@@ -41,27 +42,23 @@ public class BoardValidator implements Validator<Board> {
             throw new IllegalArgumentException("Board has no list of piles.");
         }
         if (piles.size() != numberOfPiles) {
-            throw new IllegalArgumentException("Board must have "
-                    + numberOfPiles + " piles, instead has " + piles.size());
+            throw new IllegalArgumentException(
+                    "Board must have " + numberOfPiles + " piles, instead has " + piles.size());
         }
         for (final Pile pile : piles) {
             pileValidator.validate(pile);
         }
         final List<Card> drawPile = board.getDrawPile();
         if (drawPile == null) {
-            throw new IllegalArgumentException(
-                    "Board draw pile cannot be null.");
+            throw new IllegalArgumentException("Board draw pile cannot be null.");
         }
         final int drawIndex = board.getDrawIndex();
         if (drawIndex < 0) {
-            throw new IllegalArgumentException(
-                    "Draw index must be non-negative, is " + drawIndex);
+            throw new IllegalArgumentException("Draw index must be non-negative, is " + drawIndex);
         }
         if (drawIndex > drawPile.size()) {
-            throw new IllegalArgumentException(
-                    "Draw index must not be larger than the draw pile size.  Draw pile has "
-                            + drawPile.size() + " cards, draw index is "
-                            + drawIndex);
+            throw new IllegalArgumentException("Draw index must not be larger than the draw pile size.  Draw pile has "
+                    + drawPile.size() + " cards, draw index is " + drawIndex);
         }
         // count the cards
         int numCards = drawPile.size();
@@ -73,8 +70,8 @@ public class BoardValidator implements Validator<Board> {
             numCards += pile.getNumberOfFaceUpCards();
         }
         if (numCards != deckSize) {
-            throw new IllegalArgumentException("Must have " + deckSize
-                    + " cards on the board, instead has " + numCards + ".");
+            throw new IllegalArgumentException(
+                    "Must have " + deckSize + " cards on the board, instead has " + numCards + ".");
         }
     }
     

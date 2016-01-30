@@ -10,6 +10,7 @@ import org.silnith.deck.Card;
 import org.silnith.deck.Suit;
 import org.silnith.deck.Value;
 
+
 public class Game extends JFrame {
     
     public Game() {
@@ -26,7 +27,7 @@ public class Game extends JFrame {
         upperPanel.add(drawPile);
         upperPanel.add(Box.createHorizontalGlue());
         upperPanel.add(goal);
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 7; i++ ) {
             final JComponent pile = new JPanel();
             lowerPanel.add(pile);
             pile.add(new CardPanel(new Card(Value.values()[i + 1], Suit.HEART)));

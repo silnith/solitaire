@@ -5,6 +5,7 @@ import java.util.List;
 import org.silnith.deck.Card;
 import org.silnith.game.solitaire.Board;
 
+
 public class ResetDrawPileMove implements SolitaireMove {
     
     private final int sourceIndex;
@@ -50,8 +51,7 @@ public class ResetDrawPileMove implements SolitaireMove {
     
     @Override
     public String toString() {
-        return "Reset draw pile from index " + sourceIndex
-                + " to the beginning.";
+        return "Reset draw pile from index " + sourceIndex + " to the beginning.";
     }
     
 }

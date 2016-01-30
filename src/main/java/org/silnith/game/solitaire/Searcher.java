@@ -22,6 +22,7 @@ import org.silnith.util.LinkedNode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+
 /**
  * A stateful search engine used to expand and traverse the game state tree for
  * a particular game starting position.
@@ -34,7 +35,7 @@ public class Searcher implements Runnable {
     
     private final GameState<SolitaireMove, Board> startNode;
     
-//    private final BlockingDeque<GameState<Board>> pendingNodes;
+    // private final BlockingDeque<GameState<Board>> pendingNodes;
     private final Deque<GameState<SolitaireMove, Board>> pendingNodes;
     
     private final AtomicInteger maxDepthSearched;
@@ -44,17 +45,15 @@ public class Searcher implements Runnable {
     private final Collection<GameState<SolitaireMove, Board>> solutions;
     
     @Inject
-    public Searcher(final Solitaire game,
-            final GameState<SolitaireMove, Board> startNode) {
+    public Searcher(final Solitaire game, final GameState<SolitaireMove, Board> startNode) {
         super();
         this.startNode = startNode;
         this.game = game;
-//        this.pendingNodes = new LinkedBlockingDeque<>();
+        // this.pendingNodes = new LinkedBlockingDeque<>();
         this.pendingNodes = new ConcurrentLinkedDeque<>();
         this.maxDepthSearched = new AtomicInteger();
         this.nodesSearched = new AtomicLong();
-        this.solutions = Collections
-                .synchronizedSet(new HashSet<GameState<SolitaireMove, Board>>());
+        this.solutions = Collections.synchronizedSet(new HashSet<GameState<SolitaireMove, Board>>());
     }
     
     public Solitaire getGame() {
@@ -96,41 +95,38 @@ public class Searcher implements Runnable {
                 return;
             }
             succeeded = maxDepthSearched.compareAndSet(current, depth);
-        } while (!succeeded);
+        } while ( !succeeded);
     }
     
-    public Collection<GameState<SolitaireMove, Board>> search(
-            final GameState<SolitaireMove, Board> node) {
+    public Collection<GameState<SolitaireMove, Board>> search(final GameState<SolitaireMove, Board> node) {
         nodesSearched.incrementAndGet();
         final LinkedNode<SolitaireMove> pastMoves = node.getMoves();
         final LinkedNode<Board> pastBoards = node.getBoards();
         final Board currentBoard = pastBoards.getFirst();
         
-//        if (game.isWin(currentBoard)) {
-//            solutions.add(node);
-//            printSolution(node);
-//            continue;
-//        }
+        // if (game.isWin(currentBoard)) {
+        // solutions.add(node);
+        // printSolution(node);
+        // continue;
+        // }
         
-//        if (pastBoards.size() > MAX_DEPTH) {
-//            continue;
-//        }
+        // if (pastBoards.size() > MAX_DEPTH) {
+        // continue;
+        // }
         
-        final Collection<SolitaireMove> possibleMoves = game
-                .findAllMoves(currentBoard);
+        final Collection<SolitaireMove> possibleMoves = game.findAllMoves(currentBoard);
         final List<GameState<SolitaireMove, Board>> nextMoves = new ArrayList<>();
         for (final SolitaireMove possibleMove : possibleMoves) {
             final Board possibleBoard = possibleMove.apply(currentBoard);
             game.validate(possibleBoard);
             
-            final GameState<SolitaireMove, Board> newNode = game
-                    .pruneGameState(new GameState<>(node, possibleMove,
-                            possibleBoard));
-            
+            final GameState<SolitaireMove, Board> newNode =
+                    game.pruneGameState(new GameState<>(node, possibleMove, possibleBoard));
+                    
             if (game.isWin(possibleBoard)) {
                 solutions.add(newNode);
                 setMaxDepthSearched(pastBoards.size());
-//                printSolution(newNode);
+                // printSolution(newNode);
                 continue;
             }
             
@@ -141,17 +137,15 @@ public class Searcher implements Runnable {
         return nextMoves;
     }
     
-//    private static final int MAX_DEPTH = 54;
+    // private static final int MAX_DEPTH = 54;
     
-    private void putNodeInQueue(final GameState<SolitaireMove, Board> node)
-            throws InterruptedException {
-//        pendingNodes.putLast(node);
+    private void putNodeInQueue(final GameState<SolitaireMove, Board> node) throws InterruptedException {
+        // pendingNodes.putLast(node);
         pendingNodes.add(node);
     }
     
-    private GameState<SolitaireMove, Board> getNodeFromQueue()
-            throws InterruptedException {
-//        return pendingNodes.takeLast();
+    private GameState<SolitaireMove, Board> getNodeFromQueue() throws InterruptedException {
+        // return pendingNodes.takeLast();
         GameState<SolitaireMove, Board> node = pendingNodes.pollLast();
         while (node == null) {
             Thread.sleep(3000);
@@ -176,9 +170,9 @@ public class Searcher implements Runnable {
                         putNodeInQueue(newNode);
                     }
                 } catch (final InterruptedException e) {
-//                    e.printStackTrace();
+                    // e.printStackTrace();
                 }
-            } while (!pendingNodes.isEmpty());
+            } while ( !pendingNodes.isEmpty());
         }
         
     }
@@ -186,34 +180,31 @@ public class Searcher implements Runnable {
     private static final int NUM_THREADS = 8;
     
     public static void main(final String[] args) throws InterruptedException {
-        final ApplicationContext context = new AnnotationConfigApplicationContext(
-                SearcherConfiguration.class);
+        final ApplicationContext context = new AnnotationConfigApplicationContext(SearcherConfiguration.class);
         
         final List<Card> deck = context.getBean("deck", List.class);
         
         final Solitaire solitaire = context.getBean(Solitaire.class);
-//        final List<Card> deck = solitaire.winningDeck();
-//        final List<Card> deck = solitaire.unknownDeck1();
+        // final List<Card> deck = solitaire.winningDeck();
+        // final List<Card> deck = solitaire.unknownDeck1();
         
         final DealMove firstMove = solitaire.dealMove(deck);
-        final LinkedNode<SolitaireMove> moves = new LinkedNode<SolitaireMove>(
-                firstMove);
-//        final Board firstBoard = solitaire.winningBoard();
+        final LinkedNode<SolitaireMove> moves = new LinkedNode<SolitaireMove>(firstMove);
+        // final Board firstBoard = solitaire.winningBoard();
         final Board firstBoard = solitaire.deal(firstMove);
         solitaire.validate(firstBoard);
-        final LinkedNode boards = new LinkedNode<Board>(firstBoard);
-        final GameState<SolitaireMove, Board> startingNode = new GameState<SolitaireMove, Board>(
-                moves, boards);
+        final LinkedNode<Board> boards = new LinkedNode<Board>(firstBoard);
+        final GameState<SolitaireMove, Board> startingNode = new GameState<SolitaireMove, Board>(moves, boards);
         
         System.out.println(firstBoard);
         
         final Searcher searcher = new Searcher(solitaire, startingNode);
-//        searcher.pendingNodes.putLast(startingNode);
+        // searcher.pendingNodes.putLast(startingNode);
         searcher.pendingNodes.add(startingNode);
         
-//        searcher.run();
+        // searcher.run();
         final Collection<Thread> threads = new ArrayList<>(NUM_THREADS);
-        for (int i = 0; i < NUM_THREADS; i++) {
+        for (int i = 0; i < NUM_THREADS; i++ ) {
             final Runnable worker = searcher.getNewWorker();
             final Thread thread = new Thread(worker);
             threads.add(thread);
@@ -224,30 +215,25 @@ public class Searcher implements Runnable {
         do {
             Thread.sleep(3000);
             System.out.println();
-            System.out.println("Number of solutions found: "
-                    + formatter.format(searcher.solutions.size()));
-            System.out.println("Maximum tree depth searched: "
-                    + formatter.format(searcher.maxDepthSearched.get()));
-            System.out.println("Pending nodes to search: "
-                    + formatter.format(searcher.pendingNodes.size()));
-            System.out.println("Nodes searched: "
-                    + formatter.format(searcher.nodesSearched.get()));
-//            System.out.println("Cycles detected: " +
-//                    formatter.format(solitaire.cyclesDetected.get()));
-//            System.out.println("Draw advances coalesced: " +
-//                    formatter.format(searcher.drawAdvancesCoalesced.get()));
-//            System.out.println("Pile moves after draw advance pruned: " +
-//                    formatter.format(searcher.pileMoveAfterDrawAdvancePrune.get()));
-//            System.out.println("Repeated moves of the same pile pruned: " +
-//                    formatter.format(searcher.samePileMovedTwicePrune.get()));
-        } while (!searcher.pendingNodes.isEmpty());
+            System.out.println("Number of solutions found: " + formatter.format(searcher.solutions.size()));
+            System.out.println("Maximum tree depth searched: " + formatter.format(searcher.maxDepthSearched.get()));
+            System.out.println("Pending nodes to search: " + formatter.format(searcher.pendingNodes.size()));
+            System.out.println("Nodes searched: " + formatter.format(searcher.nodesSearched.get()));
+            // System.out.println("Cycles detected: " +
+            // formatter.format(solitaire.cyclesDetected.get()));
+            // System.out.println("Draw advances coalesced: " +
+            // formatter.format(searcher.drawAdvancesCoalesced.get()));
+            // System.out.println("Pile moves after draw advance pruned: " +
+            // formatter.format(searcher.pileMoveAfterDrawAdvancePrune.get()));
+            // System.out.println("Repeated moves of the same pile pruned: " +
+            // formatter.format(searcher.samePileMovedTwicePrune.get()));
+        } while ( !searcher.pendingNodes.isEmpty());
         
         for (final Thread thread : threads) {
             thread.interrupt();
         }
         
-        System.out.println("Number of solutions found: "
-                + formatter.format(searcher.solutions.size()));
+        System.out.println("Number of solutions found: " + formatter.format(searcher.solutions.size()));
         System.out.println();
         for (final GameState<SolitaireMove, Board> node : searcher.solutions) {
             System.out.println();
@@ -262,7 +248,7 @@ public class Searcher implements Runnable {
         int count = 0;
         synchronized (System.out) {
             for (final SolitaireMove move : copy) {
-                System.out.print(++count);
+                System.out.print( ++count);
                 System.out.print(": ");
                 System.out.println(move);
             }
