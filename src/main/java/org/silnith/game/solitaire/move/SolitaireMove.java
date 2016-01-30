@@ -25,8 +25,7 @@ public interface SolitaireMove extends Move<Board> {
      * Returns the cards that have been moved.
      * 
      * @return the cards moved
-     * @throws RuntimeException
-     *         if {@link #hasCards()} returns {@code false}
+     * @throws RuntimeException if {@link #hasCards()} returns {@code false}
      */
     public List<Card> getCards();
     

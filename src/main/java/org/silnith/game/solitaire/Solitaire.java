@@ -69,10 +69,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * and a draw advance of three. This game will not return redundant moves by
      * default.
      * 
-     * @param numberOfStacks
-     *        the number of stacks in the game
-     * @param boardValidator
-     *        the board validator
+     * @param numberOfStacks the number of stacks in the game
+     * @param boardValidator the board validator
      */
     @Inject
     public Solitaire(final int numberOfStacks, final BoardValidator boardValidator) {
@@ -112,8 +110,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Sets the number of cards to flip at once when the draw pile is advanced.
      * 
-     * @param drawAdvance
-     *        the number of cards to flip for each advance of the draw pile
+     * @param drawAdvance the number of cards to flip for each advance of the
+     *        draw pile
      */
     public void setDrawAdvance(final int drawAdvance) {
         if (drawAdvance <= 0) {
@@ -159,9 +157,9 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * {@code true}. For searching the game tree efficiently, this should be set
      * to {@code false}.
      * 
-     * @param returnRedundantMoves
-     *        whether {@link #findAllMoves(Board)} will return more than one
-     *        move that can result in an equivalent game state
+     * @param returnRedundantMoves whether {@link #findAllMoves(Board)} will
+     *        return more than one move that can result in an equivalent game
+     *        state
      */
     public void setReturnRedundantMoves(final boolean returnRedundantMoves) {
         this.returnRedundantMoves = returnRedundantMoves;
@@ -187,8 +185,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns a {@link SolitaireMove} representing a deal of the provided deck
      * of cards into a new game of solitaire.
      * 
-     * @param deck
-     *        the deck of cards to deal
+     * @param deck the deck of cards to deal
      * @return a {@link SolitaireMove} representing the dealing of the cards
      */
     public DealMove dealMove(final List<Card> deck) {
@@ -198,8 +195,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Returns the board that results from the provided deal.
      * 
-     * @param move
-     *        a move representing dealing a deck into a game of solitaire
+     * @param move a move representing dealing a deck into a game of solitaire
      * @return the initial board after the deal
      */
     public Board deal(final DealMove move) {
@@ -210,8 +206,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns the board that results from dealing the provided deck of cards
      * into a new game of solitaire.
      * 
-     * @param deck
-     *        the deck of cards to deal
+     * @param deck the deck of cards to deal
      * @return the initial board after the deal
      */
     public Board deal(final List<Card> deck) {
@@ -224,8 +219,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * move history to see if the board was created from a legal sequence of
      * moves.
      * 
-     * @param board
-     *        the board to validate
+     * @param board the board to validate
      */
     public void validate(final Board board) {
         boardValidator.validate(board);
@@ -234,10 +228,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Applies the move to the given board and returns a new board.
      * 
-     * @param move
-     *        the move to apply
-     * @param board
-     *        the board to apply the move to
+     * @param move the move to apply
+     * @param board the board to apply the move to
      * @return the new board state
      */
     public Board applyMove(final SolitaireMove move, final Board board) {
@@ -373,10 +365,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * checks whether the top face-up card on the pile is one higher and of the
      * opposite color to the provided card.
      * 
-     * @param card
-     *        the card to potentially put on the pile
-     * @param pile
-     *        the pile of cards that is to receive the card
+     * @param card the card to potentially put on the pile
+     * @param pile the pile of cards that is to receive the card
      * @return whether this is a legal move
      */
     protected boolean canAddToPile(final Card card, final Pile pile) {
@@ -388,10 +378,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * This checks whether the top face-up card on the pile is one higher and of
      * the opposite color to the first card in the provided stack of cards.
      * 
-     * @param cards
-     *        the stack of cards to potentially put on the pile
-     * @param pile
-     *        the pile of cards that is to receive the stack
+     * @param cards the stack of cards to potentially put on the pile
+     * @param pile the pile of cards that is to receive the stack
      * @return whether this is a legal move
      */
     protected boolean canAddToPile(final List<Card> cards, final Pile pile) {
@@ -413,10 +401,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Returns the top card in the goal for the given suit.
      * 
-     * @param suit
-     *        the suit to check
-     * @param goal
-     *        the goal
+     * @param suit the suit to check
+     * @param goal the goal
      * @return the top card from the goal for {@code suit}
      */
     protected Card getTopOfGoal(final Suit suit, final Map<Suit, List<Card>> goal) {
@@ -430,10 +416,8 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Returns whether the given card can be added to the goal.
      * 
-     * @param card
-     *        the card to add to the goal
-     * @param goal
-     *        the goal
+     * @param card the card to add to the goal
+     * @param goal the goal
      * @return whether this is a legal move
      */
     protected boolean canAddToGoal(final Card card, final Map<Suit, List<Card>> goal) {
@@ -457,12 +441,9 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * Returns whether the top card of the given suit in the goal can be stacked
      * on top of the given card.
      * 
-     * @param suit
-     *        the suit in the goal from which to draw
-     * @param goal
-     *        the goal
-     * @param card
-     *        the card to stack on
+     * @param suit the suit in the goal from which to draw
+     * @param goal the goal
+     * @param card the card to stack on
      * @return whether this is a legal move
      */
     protected boolean canTakeFromGoal(final Suit suit, final Map<Suit, List<Card>> goal, final Card card) {
@@ -488,8 +469,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
     /**
      * Returns whether the given board is a game of solitaire that has been won.
      * 
-     * @param currentBoard
-     *        the board to check
+     * @param currentBoard the board to check
      * @return {@code true} if all the cards in the given board have been moved
      *         to the goal
      */
@@ -512,8 +492,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * redundant moves will not be identical, but some set of moves may result
      * in virtually equivalent board states.
      * 
-     * @param state
-     *        the game state to search for legal moves
+     * @param state the game state to search for legal moves
      * @return a collection of legal moves for the given game
      */
     @Override
@@ -528,8 +507,7 @@ public class Solitaire implements Game<SolitaireMove, Board> {
      * redundant moves will not be identical, but some set of moves may result
      * in virtually equivalent board states.
      * 
-     * @param currentBoard
-     *        the board to search for legal moves
+     * @param currentBoard the board to search for legal moves
      * @return a collection of legal moves for the given board
      */
     public Collection<SolitaireMove> findAllMoves(final Board currentBoard) {
