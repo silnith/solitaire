@@ -1,8 +1,9 @@
 package org.silnith.game.solitaire;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.silnith.deck.Suit.CLUB;
 import static org.silnith.deck.Suit.DIAMOND;
 import static org.silnith.deck.Suit.HEART;
@@ -28,7 +29,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.silnith.deck.Card;
 import org.silnith.deck.Suit;
 
@@ -330,7 +331,7 @@ public class BoardTest {
         assertEquals(expectedBoard, actualBoard);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoveStackTooManyCards() {
         final List<Card> stack = Arrays.asList(new Card(KING, SPADE));
         
@@ -338,10 +339,10 @@ public class BoardTest {
         stackInFirstPile.set(0, new Pile(null, stack));
         final Board board = new Board(stackInFirstPile, emptyListOfCards, 0, emptyGoal);
         
-        board.moveStack(0, 1, 2);
+        assertThrows(RuntimeException.class, () -> board.moveStack(0, 1, 2));
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoveStackTooFewCards() {
         final List<Card> stack = Arrays.asList(new Card(KING, SPADE));
         
@@ -349,10 +350,10 @@ public class BoardTest {
         stackInFirstPile.set(0, new Pile(null, stack));
         final Board board = new Board(stackInFirstPile, emptyListOfCards, 0, emptyGoal);
         
-        board.moveStack(0, 1, 0);
+        assertThrows(RuntimeException.class, () -> board.moveStack(0, 1, 0));
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoveStackSameFromTo() {
         final List<Card> stack = Arrays.asList(new Card(KING, SPADE));
         
@@ -360,7 +361,7 @@ public class BoardTest {
         stackInFirstPile.set(0, new Pile(null, stack));
         final Board board = new Board(stackInFirstPile, emptyListOfCards, 0, emptyGoal);
         
-        board.moveStack(0, 0, 1);
+        assertThrows(RuntimeException.class, () -> board.moveStack(0, 0, 1));
     }
     
     @Test
@@ -500,11 +501,11 @@ public class BoardTest {
         assertEquals(expectedBoard, actualBoard);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoveCardToGoalFromEmptyPile() {
         final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
-        board.moveCardToGoal(2);
+        assertThrows(RuntimeException.class, () -> board.moveCardToGoal(2));
     }
     
     @Test
@@ -539,19 +540,19 @@ public class BoardTest {
         assertEquals(expectedBoard, actualBoard);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testDrawCardToPileEmpty() {
         final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
-        board.drawCardToPile(4);
+        assertThrows(RuntimeException.class, () -> board.drawCardToPile(4));
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testDrawCardToPileUnderflow() {
         final List<Card> drawPile = Arrays.asList(new Card(KING, CLUB));
         final Board board = new Board(emptyPiles, drawPile, 0, emptyGoal);
         
-        board.drawCardToPile(4);
+        assertThrows(RuntimeException.class, () -> board.drawCardToPile(4));
     }
     
     @Test
@@ -665,19 +666,19 @@ public class BoardTest {
         assertEquals(expectedBoard, actualBoard);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testDrawCardToGoalEmpty() {
         final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
-        board.drawCardToGoal();
+        assertThrows(RuntimeException.class, () -> board.drawCardToGoal());
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testDrawCardToGoalUnderflow() {
         final List<Card> drawPile = Arrays.asList(new Card(ACE, SPADE));
         final Board board = new Board(emptyPiles, drawPile, 0, emptyGoal);
         
-        board.drawCardToGoal();
+        assertThrows(RuntimeException.class, () -> board.drawCardToGoal());
     }
     
     @Test
@@ -813,11 +814,11 @@ public class BoardTest {
         assertEquals(expectedBoard, actualBoard);
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testMoveCardFromGoalEmpty() {
         final Board board = new Board(emptyPiles, emptyListOfCards, 0, emptyGoal);
         
-        board.moveCardFromGoal(CLUB, 3);
+        assertThrows(RuntimeException.class, () -> board.moveCardFromGoal(CLUB, 3));
     }
     
     @Test

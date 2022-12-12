@@ -1,19 +1,20 @@
 package org.silnith.game.solitaire.move;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.silnith.game.solitaire.Board;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AdvanceDrawPileMoveTest {
     
     @Mock
@@ -53,11 +54,11 @@ public class AdvanceDrawPileMoveTest {
         assertEquals(9, coalescedMove.getIncrement());
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testCoalesceNull() {
         final AdvanceDrawPileMove move = new AdvanceDrawPileMove(17, 34);
         
-        move.coalesce(null);
+        assertThrows(NullPointerException.class, () -> move.coalesce(null));
     }
     
     @Test
@@ -67,11 +68,11 @@ public class AdvanceDrawPileMoveTest {
         assertFalse(move.hasCards());
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testGetCards() {
         final AdvanceDrawPileMove move = new AdvanceDrawPileMove(17, 34);
         
-        move.getCards();
+        assertThrows(RuntimeException.class, () -> move.getCards());
     }
     
     @Test

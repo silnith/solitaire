@@ -1,9 +1,9 @@
 package org.silnith.game.solitaire;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.silnith.deck.Suit.CLUB;
 import static org.silnith.deck.Suit.DIAMOND;
 import static org.silnith.deck.Suit.HEART;
@@ -30,10 +30,10 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.silnith.deck.Card;
 import org.silnith.deck.Suit;
 import org.silnith.deck.Value;
@@ -44,7 +44,7 @@ import org.silnith.game.solitaire.move.ResetDrawPileMove;
 import org.silnith.game.solitaire.move.SolitaireMove;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SolitaireTest {
     
     private final List<Card> emptyListOfCards;

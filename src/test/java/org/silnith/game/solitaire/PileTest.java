@@ -1,8 +1,9 @@
 package org.silnith.game.solitaire;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.silnith.deck.Suit.CLUB;
 import static org.silnith.deck.Suit.DIAMOND;
 import static org.silnith.deck.Suit.HEART;
@@ -21,7 +22,7 @@ import static org.silnith.deck.Value.TWO;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.silnith.deck.Card;
 
 
@@ -241,14 +242,14 @@ public class PileTest {
         assertEquals(Arrays.asList(new Card[] { new Card(ACE, HEART) }), pile.getFaceUpCards());
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetTopCardsOverflow() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
                         
-        pile.getTopCards(5);
+        assertThrows(IllegalArgumentException.class, () -> pile.getTopCards(5));
     }
     
     @Test
@@ -294,24 +295,24 @@ public class PileTest {
         assertEquals(Arrays.asList(new Card[] { new Card(TEN, DIAMOND) }), pile.getTopCards(1));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetTopCardsUnderflow() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
                         
-        pile.getTopCards(0);
+        assertThrows(IllegalArgumentException.class, () -> pile.getTopCards(0));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testPileMissingTopCardsOverflow() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
-                        
-        pile.getPileMissingTopCards(5);
+              
+        assertThrows(IllegalArgumentException.class, () -> pile.getPileMissingTopCards(5));
     }
     
     @Test
@@ -365,14 +366,14 @@ public class PileTest {
         assertEquals(expected, pile.getPileMissingTopCards(1));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testPileMissingTopCardsUnderflow() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
                         
-        pile.getPileMissingTopCards(0);
+        assertThrows(IllegalArgumentException.class, () -> pile.getPileMissingTopCards(0));
     }
     
     @Test
@@ -389,14 +390,14 @@ public class PileTest {
         assertEquals(expected, pile.addNewCard(new Card(NINE, CLUB)));
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testAddNewCardNull() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
-                        
-        pile.addNewCard(null);
+              
+        assertThrows(RuntimeException.class, () -> pile.addNewCard(null));
     }
     
     @Test
@@ -429,24 +430,24 @@ public class PileTest {
                 Arrays.asList(new Card[] { new Card(NINE, CLUB), new Card(EIGHT, DIAMOND), new Card(SEVEN, CLUB) })));
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAddNewCardsEmpty() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
                         
-        pile.addNewCards(Arrays.asList(new Card[] {}));
+        assertThrows(IllegalArgumentException.class, () -> pile.addNewCards(Arrays.asList(new Card[] {})));
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testAddNewCardsNull() {
         final Pile pile = new Pile(
                 Arrays.asList(new Card[] { new Card(FOUR, SPADE), new Card(JACK, HEART), new Card(ACE, HEART) }),
                 Arrays.asList(new Card[] { new Card(KING, CLUB), new Card(QUEEN, DIAMOND), new Card(JACK, CLUB),
                         new Card(TEN, DIAMOND) }));
-                        
-        pile.addNewCards(null);
+                       
+        assertThrows(NullPointerException.class, () -> pile.addNewCards(null));
     }
     
     @Test
